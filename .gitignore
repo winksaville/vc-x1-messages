@@ -1,0 +1,7 @@
+# Harness and tool artifacts, which appear whenever a session or a command runs in this
+# directory. This is a plain repo with no agent of its own, so none of them belong in it.
+/.claude
+/.mcp.json
+/.vc-x1
+/.git
+/.jj
