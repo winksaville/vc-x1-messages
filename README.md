@@ -16,7 +16,7 @@ permissible. Every field is optional and records routinely carry only two or thr
 writer aims for at least one of `local` or `remote`, since a record with neither points at
 nothing.
 
-## 2026-08-13T19:31:21.123Z vc-x1
+## 2026-08-13T19:31:21.123Z iiac-perf
 
 - local: [../iiac-perf/messages/test-msg.md#message1](../iiac-perf/messages/test-msg.md#message1)
 - remote: https://github.com/winksaville/iiac-perf/blob/55554b452957/messages/test-msg.md#message1
@@ -30,22 +30,28 @@ section slug.
 - `local:` the message's local file reference.
 - `remote:` the message's remote file reference.
 - `read:` added by the recipient, a UTC timestamp of when they read it. A record without it is
-  unread, so a member's open traffic is the records in their file with no `read` field.
+  unread. Receipt is not completion: a record stays open until it carries an outcome, so a
+  member's open traffic is the records in their file with no `outcome-*` field, and `read` is
+  what tells the sender their message arrived.
 - `outcome-local:` / `outcome-remote:` optional, added by the recipient, pointing at what came of
   the message, the reply or the record of what was decided. They are what let one record hold
-  both halves of an exchange.
+  both halves of an exchange, and their arrival is what closes a record.
 
-A handled record with all of them:
+A handled record, this one sent the other way, as it would sit in `iiac-perf.md`. Two things are
+worth noticing. The body is vc-x1's specimen under `notes/messages/` where iiac-perf's sits
+under `messages/`, because a body lives wherever its sender chooses. And there is no `remote:`
+yet, because the body's commit has not been pushed, which is the ordering rule from
+[Two modes](#two-modes-fast-and-durable) holding in this very example; the field gets added when
+a push makes the permalink resolvable. The exchange is staged but every reference is live:
 
-## 2026-08-13T19:31:21.123Z vc-x1
+## 2026-08-13T20:41:33.512Z vc-x1
 
 - local: [[1]]
-- remote: https://github.com/winksaville/iiac-perf/blob/55554b452957/messages/test-msg.md#message1
 - read: 2026-08-13T22:04:07.000Z
 - outcome-local: [[2]]
 - outcome-remote: https://github.com/winksaville/iiac-perf/blob/55554b452957/notes/chores/chores-07.md#docs-design-the-vc-x1-messages-repo
 
-[1]: ../iiac-perf/messages/test-msg.md#message1
+[1]: ../vc-x1/notes/messages/test-msg.md#message1
 [2]: ../iiac-perf/notes/chores/chores-07.md#docs-design-the-vc-x1-messages-repo
 
 **Fields may be added later without breaking what is already written**, which is why a record is
@@ -83,11 +89,20 @@ Which mode to use is the tradeoff in
 Same-day traffic between siblings is fine on local alone. Anything worth citing later wants the
 push.
 
-## Write and commit in one act
+## Whoever writes a record commits it
 
-Whoever writes a record commits it, in the same act. There is then no moment at which an
-uncommitted record exists, and nobody has to remember to commit someone else's writing later.
-This repo has no manager and needs none, because ownership is per write rather than per repo.
+Whoever writes a record is the one who commits it. In the same act is the ideal, since then no
+moment holds an uncommitted record, but with today's handful of friendly participants a short
+delay or batching a few writes into one commit is fine. What does not relax is the ownership:
+nobody commits someone else's writing, which is what this repo has instead of a manager, because
+ownership is per write rather than per repo.
+
+## Concurrent writes collide, and the collision is normal
+
+Every new record goes directly below its file's header, so two writers active at the same time
+conflict at exactly the same lines. The merge is trivial, keep both records in either order, and
+it is the expected cost of newest-first rather than an error. No record depends on its
+neighbours, which is what makes the resolution safe.
 
 ## The remote reference is a commit permalink
 
@@ -121,8 +136,9 @@ where to add one.
   record can be lost without losing anything, which is what makes owner-chosen policies safe.
 - **A file that does not exist yet is created by whoever writes first**, carrying no policy until
   its owner declares one. Reserving creation to the owner would make the first message to a new
-  member impossible, since only the owner may create and only the sender wants to. **This one is
-  a proposal rather than a settled rule**, and the first thing worth vc-x1's opinion.
+  member impossible, since only the owner may create and only the sender wants to. Settled as a
+  rule at vc-x1's review (2026-08-13): the one real risk, a sender imposing a policy, is already
+  defused by the no-policy-at-birth clause.
 
 ## No protection
 
