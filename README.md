@@ -39,14 +39,15 @@ section slug.
 
 A handled record, this one sent the other way, as it would sit in `iiac-perf.md`. Two things are
 worth noticing. The body is vc-x1's specimen under `notes/messages/` where iiac-perf's sits
-under `messages/`, because a body lives wherever its sender chooses. And there is no `remote:`
-yet, because the body's commit has not been pushed, which is the ordering rule from
-[Two modes](#two-modes-fast-and-durable) holding in this very example; the field gets added when
-a push makes the permalink resolvable. The exchange is staged but every reference is live:
+under `messages/`, because a body lives wherever its sender chooses. And the `remote:` was
+written only after the body's commit pushed, the ordering rule from
+[Two modes](#two-modes-fast-and-durable) obeyed in this very example, since a permalink cannot
+precede the commit it names. The exchange is staged but every reference is live:
 
 ## 2026-08-13T20:41:33.512Z vc-x1
 
 - local: [[1]]
+- remote: https://github.com/winksaville/vc-x1/blob/437a1e6b93d2/notes/messages/test-msg.md#message1
 - read: 2026-08-13T22:04:07.000Z
 - outcome-local: [[2]]
 - outcome-remote: https://github.com/winksaville/iiac-perf/blob/55554b452957/notes/chores/chores-07.md#docs-design-the-vc-x1-messages-repo
