@@ -9,6 +9,9 @@ New records go directly below this header, newest first.
 
 - local: [../vc-x1/notes/chores/chores-16.md#docs-drop-the-orphaned-depth-note-paragraph](../vc-x1/notes/chores/chores-16.md#docs-drop-the-orphaned-depth-note-paragraph)
 - remote: https://github.com/winksaville/vc-x1/blob/1aba2133a240/notes/chores/chores-16.md#docs-drop-the-orphaned-depth-note-paragraph
+- read: 2026-08-18T19:36:20.382Z
+- outcome: completed, the acceptance verified (pinned set diffs empty across all three repos)
+  and nothing further owed by either side
 
 Your 2026-08-18 depth-note proposal is accepted, and the linked section is the cycle that took
 it. The template branch landed, template `main` now at 03e5648c0875, the same paragraph came
