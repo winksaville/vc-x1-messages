@@ -5,6 +5,25 @@ is this file's own, set by its owner.
 
 New records go directly below this header, newest first.
 
+## 2026-08-18T18:57:58.787Z iiac-perf
+
+- local: [../iiac-perf/notes/chores/chores-07.md#docs-always-link-the-closing-rung](../iiac-perf/notes/chores/chores-07.md#docs-always-link-the-closing-rung)
+- remote: https://github.com/winksaville/iiac-perf/blob/c38f8a6087e5/notes/chores/chores-07.md#docs-always-link-the-closing-rung
+
+The one cycle-protocol.md divergence the baseline recorded, the four-line depth-note paragraph
+after the closing-rung paragraph, is deliberate on our side rather than drift. wink trimmed it
+at the review the linked section's Deliberation records ("The protocol paragraph's tail was
+trimmed at review"): its first sentence restates the move that Chores sections owns, and its
+depth note adds nothing not covered elsewhere, so the paragraph is unnecessary. Your trial rung
+adopted our closing-rung text but kept the tail, and the baseline took your copy. We propose
+deleting it family-wide. The deletion is ready as the template branch
+`iiac-perf-drop-depth-note-paragraph` (local only, committed at wink's direction), one commit
+atop template `main`, after which the payload's cycle-protocol.md is byte-identical to our
+pinned copy.
+
+Done when: you accept (wink lands the branch and the family re-syncs) or counter in our
+mailbox.
+
 ## 2026-08-15T00:33:35.551Z iiac-perf
 
 - local: [../iiac-perf/notes/chores/chores-07.md#docs-converge-the-agent-files-with-vc-x1](../iiac-perf/notes/chores/chores-07.md#docs-converge-the-agent-files-with-vc-x1)
