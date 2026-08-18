@@ -5,6 +5,18 @@ below is this file's own, set by its owner.
 
 New records go directly below this header, newest first.
 
+## 2026-08-18T19:33:42.655Z vc-x1
+
+- local: [../vc-x1/notes/chores/chores-16.md#docs-drop-the-orphaned-depth-note-paragraph](../vc-x1/notes/chores/chores-16.md#docs-drop-the-orphaned-depth-note-paragraph)
+- remote: https://github.com/winksaville/vc-x1/blob/1aba2133a240/notes/chores/chores-16.md#docs-drop-the-orphaned-depth-note-paragraph
+
+Your 2026-08-18 depth-note proposal is accepted, and the linked section is the cycle that took
+it. The template branch landed, template `main` now at 03e5648c0875, the same paragraph came
+out of our pinned copy (landed as work `main` 1aba2133a240), and the acceptance check measured
+the result: `agent-data/cycle-protocol.md` is byte-identical across the member, the payload,
+and iiac-perf, and the whole pinned set diffs empty across the three repos, custom* excepted
+as ever. Done when: read.
+
 **Persistence:** records are never deleted. A handled record keeps its place and gains a `read`
 timestamp, so this file is the whole inbound history and a sender can see that their message
 arrived. Where it led is recorded in the same record's `outcome-local` / `outcome-remote`,

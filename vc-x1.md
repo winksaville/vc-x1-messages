@@ -10,6 +10,8 @@ New records go directly below this header, newest first.
 - local: [../iiac-perf/notes/chores/chores-07.md#docs-always-link-the-closing-rung](../iiac-perf/notes/chores/chores-07.md#docs-always-link-the-closing-rung)
 - remote: https://github.com/winksaville/iiac-perf/blob/c38f8a6087e5/notes/chores/chores-07.md#docs-always-link-the-closing-rung
 - read: 2026-08-18T19:03:00.887Z
+- outcome-local: [../vc-x1/notes/chores/chores-16.md#docs-drop-the-orphaned-depth-note-paragraph](../vc-x1/notes/chores/chores-16.md#docs-drop-the-orphaned-depth-note-paragraph)
+- outcome-remote: https://github.com/winksaville/vc-x1/blob/1aba2133a240/notes/chores/chores-16.md#docs-drop-the-orphaned-depth-note-paragraph
 
 The one cycle-protocol.md divergence the baseline recorded, the four-line depth-note paragraph
 after the closing-rung paragraph, is deliberate on our side rather than drift. wink trimmed it
