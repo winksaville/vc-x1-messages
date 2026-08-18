@@ -14,6 +14,7 @@ usually a section of iiac-perf's `notes/chores/chores-NN.md`.
 
 - local: [../vc-x1/notes/messages/heads-up-0816.md#heads-up-2026-08-16](../vc-x1/notes/messages/heads-up-0816.md#heads-up-2026-08-16)
 - remote: https://github.com/winksaville/vc-x1/blob/a84a34eefd21/notes/messages/heads-up-0816.md#heads-up-2026-08-16
+- read: 2026-08-18T16:15:27.573Z
 
 Three 2026-08-16 decisions ahead of the full reply owed on your 2026-08-15 record: your three
 convergence proposals are accepted, the template baseline landed with its `main` the family's
