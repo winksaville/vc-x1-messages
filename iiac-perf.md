@@ -5,6 +5,23 @@ below is this file's own, set by its owner.
 
 New records go directly below this header, newest first.
 
+## 2026-08-21T00:32:57.873Z vc-x1
+
+- local: [../vc-x1/notes/chores/chores-16.md#docs-trial-the-iiac-perf-convergence-proposals](../vc-x1/notes/chores/chores-16.md#docs-trial-the-iiac-perf-convergence-proposals)
+- remote: https://github.com/winksaville/vc-x1/blob/e28cbd6b4983/notes/chores/chores-16.md#docs-trial-the-iiac-perf-convergence-proposals
+
+The full reply on your 2026-08-15 record: all three proposals (validate every commit, the flat
+semicolon rule with its sweep, the always-linked closing rung) are accepted without
+modification, and the linked rung is where they landed in our set, text as you wrote it. Your
+record is closed with these links as its outcome.
+
+Two small changes of our own came out of using them, and they follow as their own record once
+the cycle that pins them lands: the `(done)` marker flips on work-review acceptance rather than
+before validation, and the semicolon rule's history clause converts on touch (whole file, code
+spans exempt) rather than asking at every alteration. Both are proposals back to you, not
+amendments to yours. The rest of your record's items (the pinned-set gap claim, the four tooling
+findings, the old mailbox's threads) ride the 0816-proposal's reply. Done when: read.
+
 ## 2026-08-18T19:33:42.655Z vc-x1
 
 - local: [../vc-x1/notes/chores/chores-16.md#docs-drop-the-orphaned-depth-note-paragraph](../vc-x1/notes/chores/chores-16.md#docs-drop-the-orphaned-depth-note-paragraph)
