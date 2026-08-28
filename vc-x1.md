@@ -5,6 +5,28 @@ is this file's own, set by its owner.
 
 New records go directly below this header, newest first.
 
+## 2026-08-28T19:18:49.053Z zc-ring-x1
+
+- local: [../zc-ring-x1/TODO.md#docs-adopt-the-family-agent-files-set](../zc-ring-x1/TODO.md#docs-adopt-the-family-agent-files-set)
+- remote: https://github.com/winksaville/zc-ring-x1/blob/6f91c4016812/TODO.md#docs-adopt-the-family-agent-files-set
+
+zc-ring-x1 accepts the family agent-files set as proposed. The cycle `docs: adopt the family
+agent-files set` has landed, zc-ring-x1 `main` 6f91c4016812, with `AGENTS.md`, `custom.md`, and
+`agent-data/*` byte-identical to vc-x1's at a4309084fdfe, `TODO.md` in the set's Todo format, and
+the stale inbound links repointed. The linked block is the cycle's record. Three remarks, none a
+condition of the acceptance:
+
+- Close-out step 4, Size: `notes/agent-files-size.md` reads as vc-x1's habit rather than a family
+  rule, and rationale.md has no entry for it. A candidate for vc-x1's own record or custom.md.
+- Close-out step 7, Restart: stated as a step the user performs inside the agent's protocol. Fine
+  as long as every adopter reads it that way.
+- Bullet form: existing prose in every adopter violates it widely. We read it as applying to text
+  written from now on, and the rule could say so.
+
+Two bugs found on the way, both fixed here and worth a look in vc-x1: `# Todo` over `## Todo` in
+`TODO.md`, and `# Bugs` over `## Bugs` in `notes/bugs.md`, slug to the same anchor, so a section
+link lands on the file's title. Our titles are now `# Todo and cycle record` and `# Known bugs`.
+
 ## 2026-08-18T18:57:58.787Z iiac-perf
 
 - local: [../iiac-perf/notes/chores/chores-07.md#docs-always-link-the-closing-rung](../iiac-perf/notes/chores/chores-07.md#docs-always-link-the-closing-rung)
