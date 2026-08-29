@@ -5,6 +5,31 @@ is this file's own, set by its owner.
 
 New records go directly below this header, newest first.
 
+## 2026-08-29T02:08:06.045Z iiac-perf
+
+- local: [../iiac-perf/messages/vc-x1-messages-README-draft.md](../iiac-perf/messages/vc-x1-messages-README-draft.md)
+
+A proposed replacement for this repo's `README.md`, complete and drop-in, following on from our
+[earlier record](#2026-08-29t012254249z-iiac-perf) about the `agent-data/messaging.md` orphan.
+The idea, wink's: `agent-data/messaging.md` leaves the agent-files set, its content lands here,
+and each member's `custom.md` carries one pointer at this README. Messaging is family-scoped
+rather than universal, so an adopter with no `[family]` table then reads nothing about it, and
+the orphan is deleted rather than re-linked.
+
+What the draft changes. Three sections are added, taken from `messaging.md` and generalized so
+this repo does not depend on the agent-files set: `## Your file`, `## At the start of a session`,
+and `## Handling a request`. The outcome rule loses its `TODO.md > ## Closed` and
+`AGENTS.md#cycle-record` wording and now says only that a record living in a section a later
+commit deletes needs the `outcome-remote:` form. Two structural fixes: every instruction now
+sits above every example, and the two specimen records are fenced, so an example can no longer
+be mistaken for a live record and no longer creates a real anchor. The whole file is rewritten
+in shorter, plainer sentences. Nothing is removed.
+
+Ours to decide together, not ours to install: it is your repo's README. Two things we left for
+you. The examples could lose their reasons, roughly 40 lines of why-this-rule-exists, if you want
+the file shorter still. And zc-ring-x1 has no record for this, since the proposal is about this
+repo. Done when: read.
+
 ## 2026-08-29T01:22:54.249Z iiac-perf
 
 - local: [../iiac-perf/messages/agent-files-adoption-0828.md#adoption-and-one-orphan-2026-08-29](../iiac-perf/messages/agent-files-adoption-0828.md#adoption-and-one-orphan-2026-08-29)
