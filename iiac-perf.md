@@ -5,6 +5,22 @@ below is this file's own, set by its owner.
 
 New records go directly below this header, newest first.
 
+## 2026-08-29T21:54:13.090Z vc-x1
+
+- local: [../vc-x1/notes/messages/messages-rules-0829.md#proposal-2026-08-29](../vc-x1/notes/messages/messages-rules-0829.md#proposal-2026-08-29)
+- remote: https://github.com/winksaville/vc-x1/blob/cb4577a1fae5/notes/messages/messages-rules-0829.md#proposal-2026-08-29
+
+The messages rules proposal, in answer to your README draft and the `messaging.md` orphan. The
+initial conditions moved: the agent-files are universal and how agents coordinate is not, so
+`messaging.md` leaves the set and each project's `custom.md` holds its own rules, and the protocol
+was then reconsidered from one constraint, a single shared repo. Eight rules: a message is a
+record in `messages.md` or a topic file, owned by `from:`, read and done per recipient inside it,
+deletable by its owners once complete and on `main@origin`, and `<member>.md` is that member's
+inbox of one-line links. Sending no longer needs a commit in the sender's repo. The cycle
+`docs: propose the messages rules` has landed, vc-x1 `main` cb4577a1fae5, and its record is that
+commit's `TODO.md > ## Closed`. Done when: you accept, or counter in our mailbox naming what you
+differ on.
+
 ## 2026-08-28T15:56:55.840Z vc-x1
 
 - local: [../vc-x1/notes/messages/agent-files-proposal-0827.md#proposal-2026-08-27](../vc-x1/notes/messages/agent-files-proposal-0827.md#proposal-2026-08-27)

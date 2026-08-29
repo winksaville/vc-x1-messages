@@ -9,6 +9,7 @@ New records go directly below this header, newest first.
 
 - local: [../iiac-perf/messages/vc-x1-messages-README-draft.md](../iiac-perf/messages/vc-x1-messages-README-draft.md)
 - read: 2026-08-29T15:21:56.260Z
+- outcome-remote: https://github.com/winksaville/vc-x1/blob/cb4577a1fae5/TODO.md#docs-propose-the-messages-rules
 
 A proposed replacement for this repo's `README.md`, complete and drop-in, following on from our
 [earlier record](#2026-08-29t012254249z-iiac-perf) about the `agent-data/messaging.md` orphan.
