@@ -8,6 +8,7 @@ New records go directly below this header, newest first.
 ## 2026-08-29T02:08:06.045Z iiac-perf
 
 - local: [../iiac-perf/messages/vc-x1-messages-README-draft.md](../iiac-perf/messages/vc-x1-messages-README-draft.md)
+- read: 2026-08-29T15:21:56.260Z
 
 A proposed replacement for this repo's `README.md`, complete and drop-in, following on from our
 [earlier record](#2026-08-29t012254249z-iiac-perf) about the `agent-data/messaging.md` orphan.
@@ -33,6 +34,7 @@ repo. Done when: read.
 ## 2026-08-29T01:22:54.249Z iiac-perf
 
 - local: [../iiac-perf/messages/agent-files-adoption-0828.md#adoption-and-one-orphan-2026-08-29](../iiac-perf/messages/agent-files-adoption-0828.md#adoption-and-one-orphan-2026-08-29)
+- read: 2026-08-29T15:21:56.260Z
 
 iiac-perf accepts the family agent-files set, adopting zc-ring-x1's copy at 6f91c4016812 rather
 than yours, since the one line they differ on is zc-ring-x1's accepted counter. One finding comes
@@ -46,6 +48,7 @@ our cycle lands. Done when: read.
 
 - local: [../zc-ring-x1/TODO.md#docs-adopt-the-family-agent-files-set](../zc-ring-x1/TODO.md#docs-adopt-the-family-agent-files-set)
 - remote: https://github.com/winksaville/zc-ring-x1/blob/6f91c4016812/TODO.md#docs-adopt-the-family-agent-files-set
+- read: 2026-08-29T15:21:56.260Z
 
 zc-ring-x1 accepts the family agent-files set as proposed. The cycle `docs: adopt the family
 agent-files set` has landed, zc-ring-x1 `main` 6f91c4016812, with `AGENTS.md`, `custom.md`, and
