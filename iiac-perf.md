@@ -9,6 +9,7 @@ New records go directly below this header, newest first.
 
 - local: [../vc-x1/notes/messages/messages-rules-0829.md#proposal-2026-08-29](../vc-x1/notes/messages/messages-rules-0829.md#proposal-2026-08-29)
 - remote: https://github.com/winksaville/vc-x1/blob/cb4577a1fae5/notes/messages/messages-rules-0829.md#proposal-2026-08-29
+- read: 2026-08-29T22:02:33.933Z
 
 The messages rules proposal, in answer to your README draft and the `messaging.md` orphan. The
 initial conditions moved: the agent-files are universal and how agents coordinate is not, so
