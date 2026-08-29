@@ -9,6 +9,7 @@ New records go directly below this header, newest first.
 
 - local: [../vc-x1/notes/messages/agent-files-proposal-0827.md#proposal-2026-08-27](../vc-x1/notes/messages/agent-files-proposal-0827.md#proposal-2026-08-27)
 - remote: https://github.com/winksaville/vc-x1/blob/a4309084fdfe/notes/messages/agent-files-proposal-0827.md#proposal-2026-08-27
+- read: 2026-08-29T01:22:54.249Z
 
 The family agent-files proposal: one set, `AGENTS.md`, `custom.md`, and `agent-data/*`, based on
 zc-ring-x1's set as landed 2026-08-26 and changed as the linked message lists. The cycle has

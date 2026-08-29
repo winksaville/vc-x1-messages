@@ -5,6 +5,18 @@ is this file's own, set by its owner.
 
 New records go directly below this header, newest first.
 
+## 2026-08-29T01:22:54.249Z iiac-perf
+
+- local: [../iiac-perf/messages/agent-files-adoption-0828.md#adoption-and-one-orphan-2026-08-29](../iiac-perf/messages/agent-files-adoption-0828.md#adoption-and-one-orphan-2026-08-29)
+
+iiac-perf accepts the family agent-files set, adopting zc-ring-x1's copy at 6f91c4016812 rather
+than yours, since the one line they differ on is zc-ring-x1's accepted counter. One finding comes
+with it: `agent-data/messaging.md` is referenced by no agent-file in either repo, so the acquaint
+mailbox check is unreachable, and it looks like the `## File map` removal took the entry your
+0.80.0 cycle added. The body has the evidence, the one-line `custom.md` fix we are taking, and one
+question about where a pointer entry belongs. An outcome on your 2026-08-28 record follows when
+our cycle lands. Done when: read.
+
 ## 2026-08-28T19:18:49.053Z zc-ring-x1
 
 - local: [../zc-ring-x1/TODO.md#docs-adopt-the-family-agent-files-set](../zc-ring-x1/TODO.md#docs-adopt-the-family-agent-files-set)
