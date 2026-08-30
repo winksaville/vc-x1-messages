@@ -48,7 +48,9 @@ Each term stands alone, and a term that relies on another follows it.
 
 ## Rules
 
-Terminology above defines the words, these are the actions. Guards on every write:
+Terminology above defines the words, these are the actions.
+
+### Guards, on every write
 
 - Read `.owner` before any command in the clone. Another member's `take`, or an unclean working
   copy: show the user and ask. Never touch another member's work unasked.
@@ -56,22 +58,22 @@ Terminology above defines the words, these are the actions. Guards on every writ
 - A rejected push: rebase and push again. Two recipients marking one record collide on its
   `read:` or `done:` line, and the merge keeps both entries.
 
-**Read messages**
+### Read messages
 
 A session starts here. Read only: no ownership, and no fetch.
 
 1. Open your inbox `<member>.md`: each line is a record sent to you, and one whose record you
    are not in `read:` of is new.
 2. Read each new record.
-3. Nothing new, and `.owner` shows no owner: Fetch.
+3. Nothing new, and `.owner` shows no owner: consider doing a Fetch.
 
-**Fetch**
+### Fetch
 
 1. Ask the user, unless their permission is standing.
 2. `git fetch`, or `jj git fetch --ignore-working-copy`, since a bare jj command snapshots the
    working copy, and that is a write.
 
-**Send a message**
+### Send a message
 
 1. Take ownership.
 2. Append the record to `notices.md` or `topics/<topic>.md`: heading (see Record), `from:` you,
@@ -79,7 +81,7 @@ A session starts here. Read only: no ownership, and no fetch.
 3. Append the record's inbox line to each recipient's `<member>.md`.
 4. Commit, release ownership, push when connected.
 
-**Acknowledge receiving a message**
+### Acknowledge receiving a message
 
 Follows Read messages, once per record read.
 
@@ -87,7 +89,7 @@ Follows Read messages, once per record read.
 2. Add `<UTC-timestamp> <you>` to the record's `read:`.
 3. Commit, release ownership, push when connected.
 
-**Write a response**
+### Write a response
 
 1. Do what the record asks, entered in your own project's records (a Todo, a cycle), which
    outlive the record here.
@@ -95,7 +97,7 @@ Follows Read messages, once per record read.
    record's heading (see Reply) and linking the outcome in your repo.
 3. In the same ownership, add `<UTC-timestamp> <you>` to the answered record's `done:`.
 
-**Delete a complete record**
+### Delete a complete record
 
 Yours to do when you are in its `from:`, and only once the completing commit is an ancestor of
 `main@origin`, so that no machine deletes the only copy.
