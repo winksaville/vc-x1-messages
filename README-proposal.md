@@ -11,42 +11,30 @@ member's `custom.md` points at this file, and taking part means following it, pu
 
 Each term stands alone, and a term that relies on another follows it.
 
-- **Record**: a message. A `## <UTC-timestamp> <title>` heading, the fields, and a body, ending
-  at the next line beginning `## ` or at the end of the file. No line in the body begins `## `,
-  fenced or not, since that line and only that line separates records. The heading is the
-  record's id and anchor.
-- **Fields**: two, always present, each a comma-separated list:
-  - `from:` the members who own the record.
-  - `to:` the members who must read it.
-
-  A record's fields never change after birth: every mark a recipient makes lives on their own
-  inbox line.
+- **Record**: a message: a `## <UTC-timestamp> <title>` heading, the fields, and a body. Only a
+  line beginning `## ` separates records, so no body line may begin one, fenced or not. The
+  heading is the record's id and anchor.
+- **Fields**: `from:`, the members who own the record, and `to:`, the members who must read it.
+  Comma-separated lists, never changed after birth.
 - **Body**: the message itself, or a reference to a section elsewhere.
-- **Reference**: a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), not a branch, because
-  a branch URL shows whatever the branch points at now and a topic bookmark is deleted once its
-  work lands.
-- **File**: one that is not a record file, such as a document a record points at, is ordinary
-  content and carries no fields.
+- **Reference**: a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), never a branch, which
+  moves or dies.
+- **File**: a non-record file, such as a document a record points at: ordinary content, no
+  fields.
 - **Notice**: a one-shot record, in `notices.md`.
-- **Thread**: a record and its replies, in `topics/<topic>.md`, one topic per file, so that
-  members editing different threads do not collide in one file and a finished thread is deleted
-  as a unit.
+- **Thread**: a record and its replies, in `topics/<topic>.md`, one topic per file: threads
+  never collide, and a finished one is deleted as a unit.
 - **Inbox**: `<member>.md`, one line per record addressed to that member,
-  `- [<heading>](<file>#<slug>)`, appended by the sender when the record is written, and marked
-  only by its own member from then on: append `read <UTC-timestamp>` on reading, and delete the
-  line with nothing more to do, the deleting commit carrying who and when. Deleting with no
-  reply means nothing to say, and a record in `topics/` gets a reply before its line goes.
-  Records and inbox lines are appended oldest first, so a thread reads top to bottom and a new
-  write is always at the end.
+  `- [<heading>](<file>#<slug>)`, appended by the sender, then marked only by its member:
+  `read <UTC-timestamp>` appended on reading, the line deleted when done (after the reply, for
+  a thread), the deleting commit carrying who and when. Everything appends oldest first.
 - **Reply**: a record whose body names the record it answers by its heading. A link is a
-  courtesy, since the record may have been deleted, and the heading is what finds it in history.
-- **Complete**: a record whose line no `to:` member's inbox still carries. Absence reads as
-  done only because Send a message writes every line in one commit with the record. A deleted
-  line or record is found by `git log -S'<heading>'`, and the commits that deleted them are the
-  record that it was handled, so the log reads as the archive's index.
-- **Clone**: one per machine, with one owner at a time. `.owner` (gitignored, append-only) holds
-  `<UTC-timestamp> take|release <member>` lines, and the last line says who owns the clone.
-- **Take ownership**: append a `take` line to `.owner`. The clone is yours until you release it.
+  courtesy, the heading is what finds it in history.
+- **Complete**: no `to:` member's inbox still carries the record's line.
+  `git log -S'<heading>'` finds what was deleted, so the log is the archive's index.
+- **Clone**: one per machine, one owner at a time. `.owner` (gitignored, append-only) holds
+  `<UTC-timestamp> take|release <member>` lines, and the last line names the owner.
+- **Take ownership**: append a `take` line to `.owner`. Yours until released.
 - **Release ownership**: append a `release` line to `.owner`. The clone is free.
 
 ## Read Actions
