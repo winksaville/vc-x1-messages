@@ -15,53 +15,50 @@ member's `custom.md` points at this file, and taking part means following it, pu
    member's inbox: one line per record addressed to them, `- [<heading>](<file>#<slug>)`,
    appended by the sender when the record is written. Records and inbox lines are appended,
    oldest first, so a thread reads top to bottom and a new write is always at the end.
-2. A record is a `## <UTC-timestamp> <title>` heading, the fields, and a body, and ends at the
+2. One clone per machine, one owner at a time. `.owner` (gitignored, append-only) holds
+   `<UTC-timestamp> take|release <member>` lines, and the last line says who owns the clone.
+   - Read it before any command in the clone. Another member's `take`, or an unclean working
+     copy: show the user and ask. Never touch another member's work unasked.
+   - Append `take`, write, re-read. A `take` after yours: stop and show both.
+   - Commit, append `release`, push when connected. A rejected push: rebase, push again.
+3. At the start of a session, once the clone is yours: push what is pending, fetch, open your
+   inbox, follow each link to a record you are not in `read:` of, read it, add yourself to
+   `read:`, commit, release, push.
+4. A record is a `## <UTC-timestamp> <title>` heading, the fields, and a body, and ends at the
    next line beginning `## ` or at the end of the file. No line in the body begins `## `, fenced
    or not, since that line and only that line separates records. The heading is the record's id
    and anchor.
-3. Four fields, always present, each a comma-separated list:
+5. Four fields, always present, each a comma-separated list:
    - `from:` the members who own the record.
    - `to:` the members who must read it.
    - `read:` `<UTC-timestamp> <member>` for each recipient who has read it. Empty at birth.
    - `done:` `<UTC-timestamp> <member>` for each recipient with nothing more to do. Empty at
-     birth. A `done:` with no reply means the recipient has nothing to say, so a request whose
-     outcome matters gets a reply record before the `done:`.
-4. The body is the message, or a reference to a section elsewhere. A reference into another
+     birth. A `done:` with no reply means the recipient has nothing to say, and a record in
+     `topics/` gets a reply before the `done:`.
+   Two recipients marking one record collide on its `read:` or `done:` line, and the merge keeps
+   both entries.
+6. The body is the message, or a reference to a section elsewhere. A reference into another
    repo is a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), not a branch, because a
    branch URL shows whatever the branch points at now and a topic bookmark is deleted once its
    work lands. A file here that is not a record file, such as a document a record points at, is
    ordinary content and carries no fields.
-5. A reply is a record whose body names the record it answers by its heading. A link is a
+7. A reply is a record whose body names the record it answers by its heading. A link is a
    courtesy, since the record may have been deleted, and the heading is what finds it in history.
-6. Whoever writes, commits right then. Push when there is connectivity. Fetch before writing when
-   possible, and when a push is rejected, rebase and push again. Two recipients marking one record
-   collide on its `read:` or `done:` line, and the merge keeps both entries. One clone per machine
-   is enough, shared by every member on it: a commit is a finished write that anyone may push,
-   and a rejected push is the only lock this repo has. What a shared clone cannot protect is a
-   half-written file, so an uncommitted change is one somebody is still working on, and rule 8
-   says what to do on finding one.
-7. A record is complete when every member in `to:` is in `done:`. A member in `from:` may delete
+8. A record is complete when every member in `to:` is in `done:`. A member in `from:` may delete
    it once it is complete and the completing commit is an ancestor of `main@origin`, so that no
    machine deletes the only copy. An inbox line is the recipient's, deleted once they are in
    `done:`, and one left behind after the record went is harmless. A deleted record is found by
    `git log -S'<heading>'`, and the commit that deleted it is the record that it was handled.
    That commit's title names what it deleted, `done: <heading>` for a record and
    `done: topics/<name>.md` for a file, so the log reads as the archive's index.
-8. At the start of a session, look at the working copy first. If it is not clean, show the
-   owner what is there and ask, since it may be a message another session on this machine was
-   in the middle of writing, or one the owner meant to finish. Never commit, push, or discard
-   it unasked. Once the working copy is clean: push what is pending, fetch, open your inbox,
-   follow each link to a record you are not in `read:` of, read it, add yourself to `read:`,
-   commit, push. A member's agent pushes this repo without asking. That delegation is scoped to
-   this repo alone and is granted by taking part.
-9. A request becomes an entry in the recipient's own records before the recipient acts on it, and
-   the reply cites what came of it by a landmark in the recipient's repo. The entry outlives the
-   exchange, so the outcome stays readable after the record here is deleted.
+9. Before acting on what a record asks, the recipient writes it into their own repo's records,
+   and the reply cites the outcome by a landmark there. The entry outlives the exchange, so the
+   outcome stays readable after the record here is deleted.
 
 ## What is not here
 
 - No format version. Fields are additive, and a reader takes what is there.
-- No per-file persistence policy. Rule 7 is the policy.
+- No per-file persistence policy. Rule 8 is the policy.
 - No local or remote pair and no fast or durable mode. The message is in the record, or the
   record points at it, and there is one write, committed.
 - No broadcast rule. A record with three members in `to:` is the ordinary record.

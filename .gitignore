@@ -5,3 +5,6 @@
 /.vc-x1
 /.git
 /.jj
+
+# The clone mutex, per README rule 2. Owned by the clone, never by the family.
+/.owner

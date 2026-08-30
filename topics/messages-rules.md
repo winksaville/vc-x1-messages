@@ -47,14 +47,17 @@ record is its first use.
 1. Layout. `notices.md` for one-shot records, `topics/<topic>.md` when a thread expects a
    reply, `<member>.md` the inbox. Threads in their own file do not collide with each other, and
    a finished thread is deleted as a unit.
-2. `done:` with no reply means the recipient has nothing to say, so a request whose outcome
-   matters gets a reply record first (rule 3).
-3. One clone per machine, shared by its members, so the clean working copy is the owner's job and
-   the agent's check: a session that finds an uncommitted change shows it and asks, never
-   commits, pushes, or discards it unasked (rules 6 and 8). Pushing is granted by taking part,
-   scoped to this repo, since an identical `custom.md` cannot grant it per member (rule 8).
+2. `done:` with no reply means the recipient has nothing to say, so a record in `topics/` gets a
+   reply first (rule 5). The word "request" is gone: what a record asks is in its body, and the
+   only kind the protocol knows is notice or thread.
+3. One clone per machine, one owner at a time, and a mutex that catches two members using it at
+   once (rule 2): `.owner`, gitignored and append-only, holds `take` and `release` lines, and a
+   member checks it before any command in the clone and again before committing. It works with
+   no connectivity, which a committed lock cannot. Your 6 and 8 fold into it, and the session
+   start sequence is rule 3 on its own. Pushing is granted by taking part, scoped to this repo,
+   since an identical `custom.md` cannot grant it per member (the intro).
 4. Request handling moves from "the project's `custom.md`" into rule 9, for the same reason.
-5. Rule 4 says why a reference names a SHA and not a branch.
+5. Rule 6 says why a reference names a SHA and not a branch.
 6. A migration section: old-format records stay until their threads close, then each owner
    clears their own inbox file down to lines.
 
