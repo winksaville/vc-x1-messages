@@ -56,8 +56,9 @@ record is its first use.
    no connectivity, which a committed lock cannot. Your 6 and 8 fold into it, and the session
    start sequence is rule 4 on its own. Pushing is granted by taking part, scoped to this repo,
    since an identical `custom.md` cannot grant it per member (the intro).
-4. Rule 9 says whose work a record asks for and where it is recorded, replacing "the project's
-   `custom.md`" as the home of request handling, for the same reason.
+4. Your rule 9 becomes `## Example`: the four operations a record asking for work goes through,
+   with the work entered in the member's own records, replacing "the project's `custom.md`" as
+   the home of request handling, for the same reason.
 5. Rule 6 says why a reference names a SHA and not a branch.
 6. A migration section: old-format records stay until their threads close, then each owner
    clears their own inbox file down to lines.

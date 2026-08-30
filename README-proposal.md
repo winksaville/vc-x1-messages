@@ -21,13 +21,14 @@ member's `custom.md` points at this file, and taking part means following it, pu
    and anchor.
 3. One clone per machine, one owner at a time. `.owner` (gitignored, append-only) holds
    `<UTC-timestamp> take|release <member>` lines, and the last line says who owns the clone.
+   Take ownership by appending a `take` line, release ownership by appending a `release` line.
    - Read it before any command in the clone. Another member's `take`, or an unclean working
      copy: show the user and ask. Never touch another member's work unasked.
-   - Append `take`, write, re-read. A `take` after yours: stop and show both.
-   - Commit, append `release`, push when connected. A rejected push: rebase, push again.
+   - Take ownership, write, re-read. A `take` after yours: stop and show both.
+   - Commit, release ownership, push when connected. A rejected push: rebase, push again.
 4. At the start of a session, once the clone is yours: push what is pending, fetch, open your
    inbox, follow each link to a record you are not in `read:` of, read it, add yourself to
-   `read:`, commit, release, push.
+   `read:`, commit, release ownership, push.
 5. Four fields, always present, each a comma-separated list:
    - `from:` the members who own the record.
    - `to:` the members who must read it.
@@ -51,12 +52,15 @@ member's `custom.md` points at this file, and taking part means following it, pu
    `git log -S'<heading>'`, and the commit that deleted it is the record that it was handled.
    That commit's title names what it deleted, `done: <heading>` for a record and
    `done: topics/<name>.md` for a file, so the log reads as the archive's index.
-9. When a record asks for work:
-   - Mark it `read:` (rule 4), enter the work in your project's records (a Todo, a cycle), and
-     release the clone.
-   - Do the work there, on your own time.
-   - Take the clone, reply with a link to the outcome, mark yourself `done:`, and release.
-   - The record here is deleted when complete, and the project's records are what outlive it.
+
+## Example
+
+A record asks a member for work. Four operations:
+
+1. Look for new messages and read them (rule 4).
+2. Take ownership, mark the record `read:`, release ownership.
+3. Do the work, entered in the member's own records (a Todo, a cycle), which outlive the record.
+4. Take ownership, record the reply with a link to the outcome and mark `done:`, release ownership.
 
 ## What is not here
 
