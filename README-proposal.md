@@ -9,27 +9,28 @@ member's `custom.md` points at this file, and taking part means following it, pu
 
 ## Terminology
 
-Each term stands alone, and a term that relies on another follows it.
+Each term stands alone, a term that relies on another follows it, and a part or kind of a term
+sits under it.
 
 - **Record**: a message: a `## <UTC-timestamp> <title>` heading, the fields, and a body. Only a
   line beginning `## ` separates records, so no body line may begin one, fenced or not. The
   heading is the record's id and anchor.
-- **Fields**: `from:`, the members who own the record, and `to:`, the members who must read it.
-  Comma-separated lists, never changed after birth.
-- **Body**: the message itself, or a reference to a section elsewhere.
+  - **Fields**: `from:`, the members who own the record, and `to:`, the members who must read
+    it. Comma-separated lists, never changed after birth.
+  - **Body**: the message itself, or a reference to a section elsewhere.
+  - **Notice**: a one-shot record, in `notices.md`.
+  - **Reply**: a record whose body names the record it answers by its heading. A link is a
+    courtesy, the heading is what finds it in history.
+  - **Thread**: a record and its replies, in `topics/<topic>.md`, one topic per file: threads
+    never collide, and a finished one is deleted as a unit.
 - **Reference**: a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), never a branch, which
   moves or dies.
 - **File**: a non-record file, such as a document a record points at: ordinary content, no
   fields.
-- **Notice**: a one-shot record, in `notices.md`.
-- **Thread**: a record and its replies, in `topics/<topic>.md`, one topic per file: threads
-  never collide, and a finished one is deleted as a unit.
 - **Inbox**: `<member>.md`, one line per record addressed to that member,
   `- [<heading>](<file>#<slug>)`, appended by the sender, then marked only by its member:
   `read <UTC-timestamp>` appended on reading, the line deleted when done (after the reply, for
   a thread), the deleting commit carrying who and when. Everything appends oldest first.
-- **Reply**: a record whose body names the record it answers by its heading. A link is a
-  courtesy, the heading is what finds it in history.
 - **Complete**: no `to:` member's inbox still carries the record's line.
   `git log -S'<heading>'` finds what was deleted, so the log is the archive's index.
 - **Clone**: one per machine, one owner at a time. `.owner` (gitignored, append-only) holds
