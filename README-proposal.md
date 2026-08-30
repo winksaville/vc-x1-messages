@@ -45,8 +45,9 @@ Each term stands alone, and a term that relies on another follows it.
   line or record is found by `git log -S'<heading>'`, and the commits that deleted them are the
   record that it was handled, so the log reads as the archive's index.
 - **Clone**: one per machine, with one owner at a time. `.owner` (gitignored, append-only) holds
-  `<UTC-timestamp> take|release <member>` lines, and the last line says who owns the clone. Take
-  ownership appends a `take` line, release ownership appends a `release` line.
+  `<UTC-timestamp> take|release <member>` lines, and the last line says who owns the clone.
+- **Take ownership**: append a `take` line to `.owner`. The clone is yours until you release it.
+- **Release ownership**: append a `release` line to `.owner`. The clone is free.
 
 ## Read Actions
 
