@@ -53,7 +53,8 @@ record is its first use.
 3. One clone per machine, one owner at a time, and a mutex that catches two members using it at
    once (Clone, in Terminology): `.owner`, gitignored and append-only, holds `take` and `release`
    lines, taken before a write and re-read before its commit. It works with no connectivity, which
-   a committed lock cannot. Your 6 and 8 fold into it, and reading needs no ownership at all.
+   a committed lock cannot. Your 6 and 8 fold into it, reading needs no ownership at all, and a
+   fetch asks the user first.
 4. The README splits into `## Terminology`, the words (your rules, as standalone terms, a term
    following what it relies on), and `## Rules`, the actions: Read messages, Send a message,
    Acknowledge receiving a message, Write a response, Delete a complete record, each writer

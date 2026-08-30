@@ -58,14 +58,18 @@ Terminology above defines the words, these are the actions. Guards on every writ
 
 **Read messages**
 
-A session starts here. Reading writes nothing, so it alone needs no ownership.
+A session starts here. Read only: no ownership, and no fetch.
 
-1. Fetch, without touching the working copy: `git fetch`, or `jj git fetch
-   --ignore-working-copy`, since a bare jj command snapshots the working copy, and that is a
-   write.
-2. Open your inbox `<member>.md`: each line is a record sent to you, and one whose record you
+1. Open your inbox `<member>.md`: each line is a record sent to you, and one whose record you
    are not in `read:` of is new.
-3. Read each new record, then acknowledge each.
+2. Read each new record, then acknowledge each.
+3. Nothing new, and `.owner` shows no owner: Fetch.
+
+**Fetch**
+
+1. Ask the user, unless their permission is standing.
+2. `git fetch`, or `jj git fetch --ignore-working-copy`, since a bare jj command snapshots the
+   working copy, and that is a write.
 
 **Send a message**
 
