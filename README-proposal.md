@@ -7,7 +7,7 @@ live anywhere a durable reference can point at, and this repo is where it is con
 them: `notices.md` and `topics/` hold the records, and `<member>.md` is that member's inbox. Every
 member's `custom.md` points at this file, and taking part means following it, pushes included.
 
-## Rules
+## Terminology
 
 1. A message is a record. A record sits in `notices.md` for a one-shot notice, or in
    `topics/<topic>.md` when a thread expects a reply, so that members editing different threads
@@ -26,9 +26,7 @@ member's `custom.md` points at this file, and taking part means following it, pu
      copy: show the user and ask. Never touch another member's work unasked.
    - Take ownership, write, re-read. A `take` after yours: stop and show both.
    - Commit, release ownership, push when connected. A rejected push: rebase, push again.
-4. At the start of a session, once the clone is yours: push what is pending, fetch, open your
-   inbox, follow each link to a record you are not in `read:` of, read it, add yourself to
-   `read:`, commit, release ownership, push.
+4. A session starts with Read messages (`## Rules`).
 5. Four fields, always present, each a comma-separated list:
    - `from:` the members who own the record.
    - `to:` the members who must read it.
@@ -55,10 +53,11 @@ member's `custom.md` points at this file, and taking part means following it, pu
    That commit's title names what it deleted, `done: <heading>` for a record and
    `done: topics/<name>.md` for a file, so the log reads as the archive's index.
 
-## Rules take 2
+## Rules
 
-The rules above define the words. These are the actions. Each one that writes is rule 3's
-write: take ownership first, commit at the end, release ownership, push when connected.
+Terminology above defines the words. These are the actions. Each one that writes is
+Terminology 3's write: take ownership first, commit at the end, release ownership, push when
+connected.
 
 **Read messages**
 
@@ -74,7 +73,7 @@ Reading writes nothing, so it alone needs no ownership.
 **Send a message**
 
 1. Take ownership.
-2. Append the record to `notices.md` or `topics/<topic>.md`: heading (rule 2), `from:` you,
+2. Append the record to `notices.md` or `topics/<topic>.md`: heading (Terminology 2), `from:` you,
    `to:` the recipients, `read:` and `done:` empty, the body.
 3. Append the record's inbox line to each recipient's `<member>.md`.
 4. Commit, release ownership, push when connected.
@@ -90,22 +89,13 @@ Reading writes nothing, so it alone needs no ownership.
 1. Do what the record asks, entered in your own project's records (a Todo, a cycle), which
    outlive the record here.
 2. Send a message: the reply record, in the same topic file, its body naming the answered
-   record's heading (rule 7) and linking the outcome in your repo.
+   record's heading (Terminology 7) and linking the outcome in your repo.
 3. In the same ownership, add `<UTC-timestamp> <you>` to the answered record's `done:`.
-
-## Example
-
-A record asks a member for work. Four operations:
-
-1. Look for new messages and read them (rule 4).
-2. Take ownership, mark the record `read:`, release ownership.
-3. Do the work, entered in the member's own records (a Todo, a cycle), which outlive the record.
-4. Take ownership, record the reply with a link to the outcome and mark `done:`, release ownership.
 
 ## What is not here
 
 - No format version. Fields are additive, and a reader takes what is there.
-- No per-file persistence policy. Rule 8 is the policy.
+- No per-file persistence policy. Terminology 8 is the policy.
 - No local or remote pair and no fast or durable mode. The message is in the record, or the
   record points at it, and there is one write, committed.
 - No broadcast rule. A record with three members in `to:` is the ordinary record.

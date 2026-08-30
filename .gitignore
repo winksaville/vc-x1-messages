@@ -6,5 +6,5 @@
 /.git
 /.jj
 
-# The clone mutex, per README rule 3. Owned by the clone, never by the family.
+# The clone mutex, per the README. Owned by the clone, never by the family.
 /.owner

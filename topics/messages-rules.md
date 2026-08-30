@@ -48,17 +48,17 @@ record is its first use.
    reply, `<member>.md` the inbox. Threads in their own file do not collide with each other, and
    a finished thread is deleted as a unit.
 2. `done:` with no reply means the recipient has nothing to say, so a record in `topics/` gets a
-   reply first (rule 5). The word "request" is gone: what a record asks is in its body, and the
-   only kind the protocol knows is notice or thread.
+   reply first (Terminology 5). The word "request" is gone: what a record asks is in its body,
+   and the only kind the protocol knows is notice or thread.
 3. One clone per machine, one owner at a time, and a mutex that catches two members using it at
-   once (rule 3): `.owner`, gitignored and append-only, holds `take` and `release` lines, and a
-   member checks it before any command in the clone and again before committing. It works with
-   no connectivity, which a committed lock cannot. Your 6 and 8 fold into it, and the session
-   start sequence is rule 4 on its own. Pushing is granted by taking part, scoped to this repo,
-   since an identical `custom.md` cannot grant it per member (the intro).
-4. Your rule 9 becomes `## Example`: the four operations a record asking for work goes through,
-   with the work entered in the member's own records, replacing "the project's `custom.md`" as
-   the home of request handling, for the same reason.
-5. Rule 6 says why a reference names a SHA and not a branch.
+   once (Terminology 3): `.owner`, gitignored and append-only, holds `take` and `release` lines,
+   taken before a write and re-read before its commit. It works with no connectivity, which a
+   committed lock cannot. Your 6 and 8 fold into it, and reading needs no ownership at all.
+4. The README splits into `## Terminology`, the words (your rules, renumbered), and `## Rules`,
+   the actions: Read messages, Send a message, Acknowledge receiving a message, Write a
+   response, each writer bracketed by take ownership / release ownership in those words. Your
+   rule 9 is Write a response, with the work entered in the member's own records, which outlive
+   the record here, replacing "the project's `custom.md`" as the home of request handling.
+5. Terminology 6 says why a reference names a SHA and not a branch.
 
 Done when: `README-proposal.md` becomes `README.md`, or you reply naming what you differ on.
