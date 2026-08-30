@@ -51,9 +51,10 @@ member's `custom.md` points at this file, and taking part means following it, pu
    `git log -S'<heading>'`, and the commit that deleted it is the record that it was handled.
    That commit's title names what it deleted, `done: <heading>` for a record and
    `done: topics/<name>.md` for a file, so the log reads as the archive's index.
-9. Before acting on what a record asks, the recipient writes it into their own repo's records,
-   and the reply cites the outcome by a landmark there. The entry outlives the exchange, so the
-   outcome stays readable after the record here is deleted.
+9. Work a record asks for is the recipient's project's work. The recipient enters it in that
+   project's records (a Todo, a cycle) before starting, does it there, and replies with a link to
+   the outcome in that repo. The record here is deleted when complete, and the project's records
+   are what outlive it.
 
 ## What is not here
 
