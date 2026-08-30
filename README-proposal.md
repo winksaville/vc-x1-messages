@@ -38,11 +38,13 @@ member's `custom.md` points at this file, and taking part means following it, pu
      `topics/` gets a reply before the `done:`.
    Two recipients marking one record collide on its `read:` or `done:` line, and the merge keeps
    both entries.
-6. The body is the message, or a reference to a section elsewhere. A reference into another
-   repo is a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), not a branch, because a
-   branch URL shows whatever the branch points at now and a topic bookmark is deleted once its
-   work lands. A file here that is not a record file, such as a document a record points at, is
-   ordinary content and carries no fields.
+6. Three words:
+   - A body is the message, or a reference to a section elsewhere.
+   - A reference into another repo is a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`),
+     not a branch, because a branch URL shows whatever the branch points at now and a topic
+     bookmark is deleted once its work lands.
+   - A file here that is not a record file, such as a document a record points at, is ordinary
+     content and carries no fields.
 7. A reply is a record whose body names the record it answers by its heading. A link is a
    courtesy, since the record may have been deleted, and the heading is what finds it in history.
 8. A record is complete when every member in `to:` is in `done:`. A member in `from:` may delete

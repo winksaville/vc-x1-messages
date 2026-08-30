@@ -60,7 +60,5 @@ record is its first use.
    with the work entered in the member's own records, replacing "the project's `custom.md`" as
    the home of request handling, for the same reason.
 5. Rule 6 says why a reference names a SHA and not a branch.
-6. A migration section: old-format records stay until their threads close, then each owner
-   clears their own inbox file down to lines.
 
 Done when: `README-proposal.md` becomes `README.md`, or you reply naming what you differ on.
