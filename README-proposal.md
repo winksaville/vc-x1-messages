@@ -62,7 +62,7 @@ A session starts here. Read only: no ownership, and no fetch.
 
 1. Open your inbox `<member>.md`: each line is a record sent to you, and one whose record you
    are not in `read:` of is new.
-2. Read each new record, then acknowledge each.
+2. Read each new record.
 3. Nothing new, and `.owner` shows no owner: Fetch.
 
 **Fetch**
@@ -80,6 +80,8 @@ A session starts here. Read only: no ownership, and no fetch.
 4. Commit, release ownership, push when connected.
 
 **Acknowledge receiving a message**
+
+Follows Read messages, once per record read.
 
 1. Take ownership.
 2. Add `<UTC-timestamp> <you>` to the record's `read:`.
