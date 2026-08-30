@@ -57,17 +57,19 @@ member's `custom.md` points at this file, and taking part means following it, pu
 
 ## Rules take 2
 
-The rules above define the words. These are the actions, each done as rule 3's write: take
-ownership first, commit at the end, release ownership, push when connected.
+The rules above define the words. These are the actions. Each one that writes is rule 3's
+write: take ownership first, commit at the end, release ownership, push when connected.
 
 **Read messages**
 
-1. Take ownership.
-2. Push what is pending, fetch.
-3. Open your inbox `<member>.md`: each line is a record sent to you, and one whose record you
+Reading writes nothing, so it alone needs no ownership.
+
+1. Fetch, without touching the working copy: `git fetch`, or `jj git fetch
+   --ignore-working-copy`, since a bare jj command snapshots the working copy, and that is a
+   write.
+2. Open your inbox `<member>.md`: each line is a record sent to you, and one whose record you
    are not in `read:` of is new.
-4. Read each new record, and add `<UTC-timestamp> <you>` to its `read:`.
-5. Commit, release ownership, push when connected.
+3. Read each new record, then acknowledge each.
 
 **Send a message**
 
