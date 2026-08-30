@@ -55,6 +55,33 @@ member's `custom.md` points at this file, and taking part means following it, pu
    That commit's title names what it deleted, `done: <heading>` for a record and
    `done: topics/<name>.md` for a file, so the log reads as the archive's index.
 
+## Rules take 2
+
+The rules above define the words. These are the actions, each done as rule 3's write: take
+ownership first, commit at the end, release ownership, push when connected.
+
+**Send a message**
+
+1. Take ownership.
+2. Append the record to `notices.md` or `topics/<topic>.md`: heading (rule 2), `from:` you,
+   `to:` the recipients, `read:` and `done:` empty, the body.
+3. Append the record's inbox line to each recipient's `<member>.md`.
+4. Commit, release ownership, push when connected.
+
+**Acknowledge receiving a message**
+
+1. Take ownership.
+2. Add `<UTC-timestamp> <you>` to the record's `read:`.
+3. Commit, release ownership, push when connected.
+
+**Write a response**
+
+1. Do what the record asks, entered in your own project's records (a Todo, a cycle), which
+   outlive the record here.
+2. Send a message: the reply record, in the same topic file, its body naming the answered
+   record's heading (rule 7) and linking the outcome in your repo.
+3. In the same ownership, add `<UTC-timestamp> <you>` to the answered record's `done:`.
+
 ## Example
 
 A record asks a member for work. Four operations:
