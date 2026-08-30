@@ -47,9 +47,11 @@ record is its first use.
 1. Layout. `notices.md` for one-shot records, `topics/<topic>.md` when a thread expects a
    reply, `<member>.md` the inbox. Threads in their own file do not collide with each other, and
    a finished thread is deleted as a unit.
-2. `done:` with no reply means the recipient has nothing to say, so a record in `topics/` gets a
-   reply first (the `done:` field). The word "request" is gone: what a record asks is in its body,
-   and the only kind the protocol knows is notice or thread.
+2. The `read:` and `done:` fields are gone: a recipient marks their own inbox line `read` and
+   deletes it when done, so every mark lives in a file only its member writes and simultaneous
+   marks cannot collide. A record is complete when no `to:` member's line remains, and a record
+   in `topics/` still gets a reply before its line goes. The word "request" is gone too: what a
+   record asks is in its body, and the only kind the protocol knows is notice or thread.
 3. One clone per machine, one owner at a time, and a mutex that catches two members using it at
    once (Clone, in Terminology): `.owner`, gitignored and append-only, holds `take` and `release`
    lines, taken before a write and re-read before its commit. It works with no connectivity, which

@@ -15,13 +15,12 @@ Each term stands alone, and a term that relies on another follows it.
   at the next line beginning `## ` or at the end of the file. No line in the body begins `## `,
   fenced or not, since that line and only that line separates records. The heading is the
   record's id and anchor.
-- **Fields**: four, always present, each a comma-separated list:
+- **Fields**: two, always present, each a comma-separated list:
   - `from:` the members who own the record.
   - `to:` the members who must read it.
-  - `read:` `<UTC-timestamp> <member>` for each recipient who has read it. Empty at birth.
-  - `done:` `<UTC-timestamp> <member>` for each recipient with nothing more to do. Empty at
-    birth. A `done:` with no reply means the recipient has nothing to say, and a record in
-    `topics/` gets a reply before the `done:`.
+
+  A record's fields never change after birth: every mark a recipient makes lives on their own
+  inbox line.
 - **Body**: the message itself, or a reference to a section elsewhere.
 - **Reference**: a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), not a branch, because
   a branch URL shows whatever the branch points at now and a topic bookmark is deleted once its
@@ -33,15 +32,18 @@ Each term stands alone, and a term that relies on another follows it.
   members editing different threads do not collide in one file and a finished thread is deleted
   as a unit.
 - **Inbox**: `<member>.md`, one line per record addressed to that member,
-  `- [<heading>](<file>#<slug>)`, appended by the sender when the record is written. Records and
-  inbox lines are appended oldest first, so a thread reads top to bottom and a new write is
-  always at the end.
+  `- [<heading>](<file>#<slug>)`, appended by the sender when the record is written, and marked
+  only by its own member from then on: append `read <UTC-timestamp>` on reading, and delete the
+  line with nothing more to do, the deleting commit carrying who and when. Deleting with no
+  reply means nothing to say, and a record in `topics/` gets a reply before its line goes.
+  Records and inbox lines are appended oldest first, so a thread reads top to bottom and a new
+  write is always at the end.
 - **Reply**: a record whose body names the record it answers by its heading. A link is a
   courtesy, since the record may have been deleted, and the heading is what finds it in history.
-- **Complete**: a record with every member of `to:` in `done:`. A deleted record is found by
-  `git log -S'<heading>'`, and the commit that deleted it is the record that it was handled, so
-  the log reads as the archive's index. An inbox line is the recipient's, deleted once they are
-  in `done:`, and one left behind after the record went is harmless.
+- **Complete**: a record whose line no `to:` member's inbox still carries. Absence reads as
+  done only because Send a message writes every line in one commit with the record. A deleted
+  line or record is found by `git log -S'<heading>'`, and the commits that deleted them are the
+  record that it was handled, so the log reads as the archive's index.
 - **Clone**: one per machine, with one owner at a time. `.owner` (gitignored, append-only) holds
   `<UTC-timestamp> take|release <member>` lines, and the last line says who owns the clone. Take
   ownership appends a `take` line, release ownership appends a `release` line.
@@ -52,8 +54,8 @@ Each term stands alone, and a term that relies on another follows it.
 
 A session starts here. Read only: no ownership, and no fetch.
 
-1. Open your inbox `<member>.md`: each line is a record sent to you, and one whose record you
-   are not in `read:` of is new.
+1. Open your inbox `<member>.md`: each line is a record sent to you, and one without a `read`
+   mark is new.
 2. Read each new record.
 3. Nothing new, and `.owner` shows no owner: consider doing a Fetch.
 
@@ -62,8 +64,7 @@ A session starts here. Read only: no ownership, and no fetch.
 Prior to performing these actions, read `.owner` and verify no other member has taken
 ownership and the working copy is clean. If not, show the user and ask how to proceed. Re-read
 `.owner` before committing, and a `take` after yours means stop and show both lines. If a push
-is rejected, work with the user to correct the situation, knowing two recipients marking one
-record collide on its `read:` or `done:` line and a merge keeps both entries.
+is rejected, work with the user to correct the situation.
 
 ### Fetch
 
@@ -75,8 +76,9 @@ record collide on its `read:` or `done:` line and a merge keeps both entries.
 
 1. Take ownership.
 2. Append the record to `notices.md` or `topics/<topic>.md`: heading (see Record), `from:` you,
-   `to:` the recipients, `read:` and `done:` empty, the body.
-3. Append the record's inbox line to each recipient's `<member>.md`.
+   `to:` the recipients, the body.
+3. Append the record's inbox line to each `to:` member's `<member>.md`, in the same commit,
+   since Complete reads a missing line as done.
 4. Commit, release ownership, push when connected.
 
 ### Acknowledge receiving a message
@@ -84,7 +86,9 @@ record collide on its `read:` or `done:` line and a merge keeps both entries.
 Follows Read messages, once per record read.
 
 1. Take ownership.
-2. Add `<UTC-timestamp> <you>` to the record's `read:`.
+2. Append `read <UTC-timestamp>` to your line in your own `<member>.md`. With nothing more to
+   do, delete the line instead: done, and the commit title is `done: <heading>` (a thread
+   record gets a reply first, see Write a response).
 3. Commit, release ownership, push when connected.
 
 ### Write a response
@@ -93,17 +97,17 @@ Follows Read messages, once per record read.
    outlive the record here.
 2. Send a message: the reply record, in the same topic file, its body naming the answered
    record's heading (see Reply) and linking the outcome in your repo.
-3. In the same ownership, add `<UTC-timestamp> <you>` to the answered record's `done:`.
+3. In the same commit, delete your inbox line for the answered record: done.
 
 ### Delete a complete record
 
-Yours to do when you are in its `from:`, and only once the completing commit is an ancestor of
-`main@origin`, so that no machine deletes the only copy.
+Yours to do when you are in its `from:`, and only once it is complete and the last line's
+deleting commit is an ancestor of `main@origin`, so that no machine deletes the only copy.
 
 1. Take ownership.
-2. Delete the record, and your own inbox lines for any record you are in `done:` of.
-3. Commit, titled `done: <heading>` (`done: topics/<name>.md` when a finished thread's file goes
-   whole), release ownership, push when connected.
+2. Delete the record.
+3. Commit, titled `close: <heading>` (`close: topics/<name>.md` when a finished thread's file
+   goes whole), release ownership, push when connected.
 
 ## What is not here
 
@@ -117,11 +121,11 @@ Yours to do when you are in its `from:`, and only once the completing commit is 
 
 ## Specimen
 
-A record in `topics/agent-files.md`, read by both recipients and done by one, and the line the
-sender appended to `iiac-perf.md` and `zc-ring-x1.md` when writing it.
+A record in `topics/agent-files.md`, and iiac-perf's inbox line after acknowledging.
+zc-ring-x1's line is already deleted: done, with who and when in the deleting commit.
 
 ```
-- [2026-08-29T15:21:56.260Z The agent-files set](topics/agent-files.md#2026-08-29t152156260z-the-agent-files-set)
+- [2026-08-29T15:21:56.260Z The agent-files set](topics/agent-files.md#2026-08-29t152156260z-the-agent-files-set) read 2026-08-29T16:02:11.004Z
 ```
 
 ```
@@ -129,8 +133,6 @@ sender appended to `iiac-perf.md` and `zc-ring-x1.md` when writing it.
 
 - from: vc-x1
 - to: iiac-perf, zc-ring-x1
-- read: 2026-08-29T16:02:11.004Z iiac-perf, 2026-08-29T16:40:09.113Z zc-ring-x1
-- done: 2026-08-29T17:40:00.000Z iiac-perf
 
 The set is proposed in vc-x1 at
 https://github.com/winksaville/vc-x1/blob/0123456789ab/notes/messages/agent-files-proposal-0827.md#proposal-2026-08-27.
