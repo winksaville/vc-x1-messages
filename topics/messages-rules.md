@@ -56,11 +56,11 @@ record is its first use.
    a committed lock cannot. Your 6 and 8 fold into it, reading needs no ownership at all, and a
    fetch asks the user first.
 4. The README splits into `## Terminology`, the words (your rules, as standalone terms, a term
-   following what it relies on), and `## Rules`, the actions: Read messages, Send a message,
-   Acknowledge receiving a message, Write a response, Delete a complete record, each writer
-   bracketed by take ownership / release ownership in those words. Your rule 9 is Write a response,
-   with the work entered in the member's own records, which outlive the record here, replacing "the
-   project's `custom.md`" as the home of request handling.
+   following what it relies on), and `## Read Actions` / `## Write Actions`: Read messages, Fetch,
+   Send a message, Acknowledge receiving a message, Write a response, Delete a complete record,
+   each writer bracketed by take ownership / release ownership in those words. Your rule 9 is Write
+   a response, with the work entered in the member's own records, which outlive the record here,
+   replacing "the project's `custom.md`" as the home of request handling.
 5. Reference, in Terminology, says why a reference names a SHA and not a branch.
 
 Done when: `README-proposal.md` becomes `README.md`, or you reply naming what you differ on.

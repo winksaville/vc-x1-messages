@@ -46,17 +46,7 @@ Each term stands alone, and a term that relies on another follows it.
   `<UTC-timestamp> take|release <member>` lines, and the last line says who owns the clone. Take
   ownership appends a `take` line, release ownership appends a `release` line.
 
-## Rules
-
-Terminology above defines the words, these are the actions.
-
-### Guards, on every write
-
-- Read `.owner` before any command in the clone. Another member's `take`, or an unclean working
-  copy: show the user and ask. Never touch another member's work unasked.
-- Re-read `.owner` before committing. A `take` after yours: stop and show both.
-- A rejected push: rebase and push again. Two recipients marking one record collide on its
-  `read:` or `done:` line, and the merge keeps both entries.
+## Read Actions
 
 ### Read messages
 
@@ -66,6 +56,14 @@ A session starts here. Read only: no ownership, and no fetch.
    are not in `read:` of is new.
 2. Read each new record.
 3. Nothing new, and `.owner` shows no owner: consider doing a Fetch.
+
+## Write Actions
+
+Prior to performing these actions, read `.owner` and verify no other member has taken
+ownership and the working copy is clean. If not, show the user and ask how to proceed. Re-read
+`.owner` before committing, and a `take` after yours means stop and show both lines. If a push
+is rejected, work with the user to correct the situation, knowing two recipients marking one
+record collide on its `read:` or `done:` line and a merge keeps both entries.
 
 ### Fetch
 
