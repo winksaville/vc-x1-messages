@@ -9,59 +9,56 @@ member's `custom.md` points at this file, and taking part means following it, pu
 
 ## Terminology
 
-1. A message is a record. A record sits in `notices.md` for a one-shot notice, or in
-   `topics/<topic>.md` when a thread expects a reply, so that members editing different threads
-   do not collide in one file and a finished thread is deleted as a unit. `<member>.md` is that
-   member's inbox: one line per record addressed to them, `- [<heading>](<file>#<slug>)`,
-   appended by the sender when the record is written. Records and inbox lines are appended,
-   oldest first, so a thread reads top to bottom and a new write is always at the end.
-2. A record is a `## <UTC-timestamp> <title>` heading, the fields, and a body, and ends at the
-   next line beginning `## ` or at the end of the file. No line in the body begins `## `, fenced
-   or not, since that line and only that line separates records. The heading is the record's id
-   and anchor.
-3. One clone per machine, one owner at a time. `.owner` (gitignored, append-only) holds
-   `<UTC-timestamp> take|release <member>` lines, and the last line says who owns the clone.
-   Take ownership by appending a `take` line, release ownership by appending a `release` line.
-   - Read it before any command in the clone. Another member's `take`, or an unclean working
-     copy: show the user and ask. Never touch another member's work unasked.
-   - Take ownership, write, re-read. A `take` after yours: stop and show both.
-   - Commit, release ownership, push when connected. A rejected push: rebase, push again.
-4. A session starts with Read messages (`## Rules`).
-5. Four fields, always present, each a comma-separated list:
-   - `from:` the members who own the record.
-   - `to:` the members who must read it.
-   - `read:` `<UTC-timestamp> <member>` for each recipient who has read it. Empty at birth.
-   - `done:` `<UTC-timestamp> <member>` for each recipient with nothing more to do. Empty at
-     birth. A `done:` with no reply means the recipient has nothing to say, and a record in
-     `topics/` gets a reply before the `done:`.
-   Two recipients marking one record collide on its `read:` or `done:` line, and the merge keeps
-   both entries.
-6. Three words:
-   - A body is the message, or a reference to a section elsewhere.
-   - A reference into another repo is a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`),
-     not a branch, because a branch URL shows whatever the branch points at now and a topic
-     bookmark is deleted once its work lands.
-   - A file here that is not a record file, such as a document a record points at, is ordinary
-     content and carries no fields.
-7. A reply is a record whose body names the record it answers by its heading. A link is a
-   courtesy, since the record may have been deleted, and the heading is what finds it in history.
-8. A record is complete when every member in `to:` is in `done:`. A member in `from:` may delete
-   it once it is complete and the completing commit is an ancestor of `main@origin`, so that no
-   machine deletes the only copy. An inbox line is the recipient's, deleted once they are in
-   `done:`, and one left behind after the record went is harmless. A deleted record is found by
-   `git log -S'<heading>'`, and the commit that deleted it is the record that it was handled.
-   That commit's title names what it deleted, `done: <heading>` for a record and
-   `done: topics/<name>.md` for a file, so the log reads as the archive's index.
+Each term stands alone, and a term that relies on another follows it.
+
+- **Record**: a message. A `## <UTC-timestamp> <title>` heading, the fields, and a body, ending
+  at the next line beginning `## ` or at the end of the file. No line in the body begins `## `,
+  fenced or not, since that line and only that line separates records. The heading is the
+  record's id and anchor.
+- **Fields**: four, always present, each a comma-separated list:
+  - `from:` the members who own the record.
+  - `to:` the members who must read it.
+  - `read:` `<UTC-timestamp> <member>` for each recipient who has read it. Empty at birth.
+  - `done:` `<UTC-timestamp> <member>` for each recipient with nothing more to do. Empty at
+    birth. A `done:` with no reply means the recipient has nothing to say, and a record in
+    `topics/` gets a reply before the `done:`.
+- **Body**: the message itself, or a reference to a section elsewhere.
+- **Reference**: a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), not a branch, because
+  a branch URL shows whatever the branch points at now and a topic bookmark is deleted once its
+  work lands.
+- **File**: one that is not a record file, such as a document a record points at, is ordinary
+  content and carries no fields.
+- **Notice**: a one-shot record, in `notices.md`.
+- **Thread**: a record and its replies, in `topics/<topic>.md`, one topic per file, so that
+  members editing different threads do not collide in one file and a finished thread is deleted
+  as a unit.
+- **Inbox**: `<member>.md`, one line per record addressed to that member,
+  `- [<heading>](<file>#<slug>)`, appended by the sender when the record is written. Records and
+  inbox lines are appended oldest first, so a thread reads top to bottom and a new write is
+  always at the end.
+- **Reply**: a record whose body names the record it answers by its heading. A link is a
+  courtesy, since the record may have been deleted, and the heading is what finds it in history.
+- **Complete**: a record with every member of `to:` in `done:`. A deleted record is found by
+  `git log -S'<heading>'`, and the commit that deleted it is the record that it was handled, so
+  the log reads as the archive's index. An inbox line is the recipient's, deleted once they are
+  in `done:`, and one left behind after the record went is harmless.
+- **Clone**: one per machine, with one owner at a time. `.owner` (gitignored, append-only) holds
+  `<UTC-timestamp> take|release <member>` lines, and the last line says who owns the clone. Take
+  ownership appends a `take` line, release ownership appends a `release` line.
 
 ## Rules
 
-Terminology above defines the words. These are the actions. Each one that writes is
-Terminology 3's write: take ownership first, commit at the end, release ownership, push when
-connected.
+Terminology above defines the words, these are the actions. Guards on every write:
+
+- Read `.owner` before any command in the clone. Another member's `take`, or an unclean working
+  copy: show the user and ask. Never touch another member's work unasked.
+- Re-read `.owner` before committing. A `take` after yours: stop and show both.
+- A rejected push: rebase and push again. Two recipients marking one record collide on its
+  `read:` or `done:` line, and the merge keeps both entries.
 
 **Read messages**
 
-Reading writes nothing, so it alone needs no ownership.
+A session starts here. Reading writes nothing, so it alone needs no ownership.
 
 1. Fetch, without touching the working copy: `git fetch`, or `jj git fetch
    --ignore-working-copy`, since a bare jj command snapshots the working copy, and that is a
@@ -73,7 +70,7 @@ Reading writes nothing, so it alone needs no ownership.
 **Send a message**
 
 1. Take ownership.
-2. Append the record to `notices.md` or `topics/<topic>.md`: heading (Terminology 2), `from:` you,
+2. Append the record to `notices.md` or `topics/<topic>.md`: heading (see Record), `from:` you,
    `to:` the recipients, `read:` and `done:` empty, the body.
 3. Append the record's inbox line to each recipient's `<member>.md`.
 4. Commit, release ownership, push when connected.
@@ -89,13 +86,23 @@ Reading writes nothing, so it alone needs no ownership.
 1. Do what the record asks, entered in your own project's records (a Todo, a cycle), which
    outlive the record here.
 2. Send a message: the reply record, in the same topic file, its body naming the answered
-   record's heading (Terminology 7) and linking the outcome in your repo.
+   record's heading (see Reply) and linking the outcome in your repo.
 3. In the same ownership, add `<UTC-timestamp> <you>` to the answered record's `done:`.
+
+**Delete a complete record**
+
+Yours to do when you are in its `from:`, and only once the completing commit is an ancestor of
+`main@origin`, so that no machine deletes the only copy.
+
+1. Take ownership.
+2. Delete the record, and your own inbox lines for any record you are in `done:` of.
+3. Commit, titled `done: <heading>` (`done: topics/<name>.md` when a finished thread's file goes
+   whole), release ownership, push when connected.
 
 ## What is not here
 
 - No format version. Fields are additive, and a reader takes what is there.
-- No per-file persistence policy. Terminology 8 is the policy.
+- No per-file persistence policy. Complete and Delete a complete record are the policy.
 - No local or remote pair and no fast or durable mode. The message is in the record, or the
   record points at it, and there is one write, committed.
 - No broadcast rule. A record with three members in `to:` is the ordinary record.
