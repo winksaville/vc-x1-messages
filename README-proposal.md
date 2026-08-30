@@ -51,10 +51,12 @@ member's `custom.md` points at this file, and taking part means following it, pu
    `git log -S'<heading>'`, and the commit that deleted it is the record that it was handled.
    That commit's title names what it deleted, `done: <heading>` for a record and
    `done: topics/<name>.md` for a file, so the log reads as the archive's index.
-9. Work a record asks for is the recipient's project's work. The recipient enters it in that
-   project's records (a Todo, a cycle) before starting, does it there, and replies with a link to
-   the outcome in that repo. The record here is deleted when complete, and the project's records
-   are what outlive it.
+9. When a record asks for work:
+   - Mark it `read:` (rule 4), enter the work in your project's records (a Todo, a cycle), and
+     release the clone.
+   - Do the work there, on your own time.
+   - Take the clone, reply with a link to the outcome, mark yourself `done:`, and release.
+   - The record here is deleted when complete, and the project's records are what outlive it.
 
 ## What is not here
 
