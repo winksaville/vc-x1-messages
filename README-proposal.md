@@ -15,19 +15,19 @@ member's `custom.md` points at this file, and taking part means following it, pu
    member's inbox: one line per record addressed to them, `- [<heading>](<file>#<slug>)`,
    appended by the sender when the record is written. Records and inbox lines are appended,
    oldest first, so a thread reads top to bottom and a new write is always at the end.
-2. One clone per machine, one owner at a time. `.owner` (gitignored, append-only) holds
+2. A record is a `## <UTC-timestamp> <title>` heading, the fields, and a body, and ends at the
+   next line beginning `## ` or at the end of the file. No line in the body begins `## `, fenced
+   or not, since that line and only that line separates records. The heading is the record's id
+   and anchor.
+3. One clone per machine, one owner at a time. `.owner` (gitignored, append-only) holds
    `<UTC-timestamp> take|release <member>` lines, and the last line says who owns the clone.
    - Read it before any command in the clone. Another member's `take`, or an unclean working
      copy: show the user and ask. Never touch another member's work unasked.
    - Append `take`, write, re-read. A `take` after yours: stop and show both.
    - Commit, append `release`, push when connected. A rejected push: rebase, push again.
-3. At the start of a session, once the clone is yours: push what is pending, fetch, open your
+4. At the start of a session, once the clone is yours: push what is pending, fetch, open your
    inbox, follow each link to a record you are not in `read:` of, read it, add yourself to
    `read:`, commit, release, push.
-4. A record is a `## <UTC-timestamp> <title>` heading, the fields, and a body, and ends at the
-   next line beginning `## ` or at the end of the file. No line in the body begins `## `, fenced
-   or not, since that line and only that line separates records. The heading is the record's id
-   and anchor.
 5. Four fields, always present, each a comma-separated list:
    - `from:` the members who own the record.
    - `to:` the members who must read it.

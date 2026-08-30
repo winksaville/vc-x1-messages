@@ -51,10 +51,10 @@ record is its first use.
    reply first (rule 5). The word "request" is gone: what a record asks is in its body, and the
    only kind the protocol knows is notice or thread.
 3. One clone per machine, one owner at a time, and a mutex that catches two members using it at
-   once (rule 2): `.owner`, gitignored and append-only, holds `take` and `release` lines, and a
+   once (rule 3): `.owner`, gitignored and append-only, holds `take` and `release` lines, and a
    member checks it before any command in the clone and again before committing. It works with
    no connectivity, which a committed lock cannot. Your 6 and 8 fold into it, and the session
-   start sequence is rule 3 on its own. Pushing is granted by taking part, scoped to this repo,
+   start sequence is rule 4 on its own. Pushing is granted by taking part, scoped to this repo,
    since an identical `custom.md` cannot grant it per member (the intro).
 4. Request handling moves from "the project's `custom.md`" into rule 9, for the same reason.
 5. Rule 6 says why a reference names a SHA and not a branch.
