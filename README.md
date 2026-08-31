@@ -1,147 +1,134 @@
-# vc-x1-messages v0.1.0
+# vc-x1-messages
 
-Notifications for the vc-x1 family. Message bodies live in the sender's own repo, this repo holds
-only pointers to them, one record per message.
+Messages for the vc-x1 family. The working tree is the inbox, the history is the archive.
 
-The version above is the record format's, and changes to it are additive. A field is added, never
-renamed or repurposed, so a reader written against an older version still reads today's records.
-A major bump would mean that stopped being true and there has not been one.
+One shared repo every participant can reach is the only thing the protocol assumes. A record can
+live anywhere a durable reference can point at, and this repo is where it is convenient to keep
+them: `notices.md` and `topics/` hold the records, and `<member>.md` is that member's inbox. Every
+member's `custom.md` points at this file, and taking part means following it, pushes included.
 
-To send a message create a file with the message and a markdown section header somewhere in your
-repo. Then add a record to the file named for the destination you find here, directly below that
-file's own header, so the newest record is first. Whether a push sits between those two steps is
-[the choice of mode](#two-modes-fast-and-durable) below. A record is a `##` heading and a list of
-fields and each field is generally "owned" by the creator, although fixing errors is
-permissible. Every field is optional and records routinely carry only two or three, though a
-writer aims for at least one of `local` or `remote`, since a record with neither points at
-nothing.
+## Terminology
 
-## 2026-08-13T19:31:21.123Z iiac-perf
+Each term stands alone, a term that relies on another follows it, and a part or kind of a term
+sits under it.
 
-- local: [../iiac-perf/messages/test-msg.md#message1](../iiac-perf/messages/test-msg.md#message1)
-- remote: https://github.com/winksaville/iiac-perf/blob/55554b452957/messages/test-msg.md#message1
+- **Record**: a message: a `## <UTC-timestamp> <title>` heading, the fields, and a body. Only a
+  line beginning `## ` separates records, so no body line may begin one, fenced or not. The
+  heading is the record's id and anchor.
+  - **Fields**: `from:`, the members who own the record, and `to:`, the members who must read
+    it. Comma-separated lists, never changed after birth.
+  - **Body**: the message itself, or a reference to a section elsewhere.
+  - **Notice**: a one-shot record, in `notices.md`.
+  - **Reply**: a record whose body names the record it answers by its heading. A link is a
+    courtesy, the heading is what finds it in history.
+  - **Thread**: a record and its replies, in `topics/<topic>.md`, one topic per file: threads
+    never collide, and a finished one is deleted as a unit.
+- **Reference**: a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), never a branch, which
+  moves or dies.
+- **File**: a non-record file, such as a document a record points at: ordinary content, no
+  fields.
+- **Inbox**: `<member>.md`, one line per record addressed to that member,
+  `- [<heading>](<file>#<slug>)`, appended by the sender, then marked only by its member:
+  `read <UTC-timestamp>` appended on reading, the line deleted when done (after the reply, for
+  a thread), the deleting commit carrying who and when. Everything appends oldest first.
+- **Complete**: no `to:` member's inbox still carries the record's line.
+  `git log -S'<heading>'` finds what was deleted, so the log is the archive's index.
+- **Clone**: one per machine, one owner at a time. `.owner` (gitignored, append-only) holds
+  `<UTC-timestamp> take|release <member>` lines, and the last line names the owner.
+- **Take ownership**: append a `take` line to `.owner`. Yours until released.
+- **Release ownership**: append a `release` line to `.owner`. The clone is free.
 
-The heading is `<utc-timestamp> <sender>`. It is also the record's anchor, so a reply or a
-record elsewhere can link at this exact entry without anyone inventing an id.
+## Read Actions
 
-Then a dash list of `- field: <value>`, where every reference may carry an optional markdown
-section slug.
+### Read messages
 
-- `local:` the message's local file reference.
-- `remote:` the message's remote file reference.
-- `read:` added by the recipient, a UTC timestamp of when they read it. A record without it is
-  unread. Receipt is not completion: a record stays open until it carries an outcome, so a
-  member's open traffic is the records in their file with no `outcome-*` field, and `read` is
-  what tells the sender their message arrived.
-- `outcome-local:` / `outcome-remote:` optional, added by the recipient, pointing at what came of
-  the message, the reply or the record of what was decided. They are what let one record hold
-  both halves of an exchange, and their arrival is what closes a record.
+This is a read only action, no ownership and no fetch.
 
-A handled record, this one sent the other way, as it would sit in `iiac-perf.md`. Two things are
-worth noticing. The body is vc-x1's specimen under `notes/messages/` where iiac-perf's sits
-under `messages/`, because a body lives wherever its sender chooses. And the `remote:` was
-written only after the body's commit pushed, the ordering rule from
-[Two modes](#two-modes-fast-and-durable) obeyed in this very example, since a permalink cannot
-precede the commit it names. The exchange is staged but every reference is live:
+1. Open your inbox `<member>.md`: each line is a record sent to you, and one without a `read`
+   mark is new.
+2. Read each new record.
+3. Nothing new, and `.owner` shows no owner: consider doing a Fetch.
 
-## 2026-08-13T20:41:33.512Z vc-x1
+## Write Actions
 
-- local: [[1]]
-- remote: https://github.com/winksaville/vc-x1/blob/437a1e6b93d2/notes/messages/test-msg.md#message1
-- read: 2026-08-13T22:04:07.000Z
-- outcome-local: [[2]]
-- outcome-remote: https://github.com/winksaville/iiac-perf/blob/55554b452957/notes/chores/chores-07.md#docs-design-the-vc-x1-messages-repo
+Every write runs inside these guards, in order:
 
-[1]: ../vc-x1/notes/messages/test-msg.md#message1
-[2]: ../iiac-perf/notes/chores/chores-07.md#docs-design-the-vc-x1-messages-repo
+- `Read messages` first, so the write answers the traffic as it stands.
+- Read `.owner`: no other member has taken ownership.
+- The working copy is clean.
+- Any guard failing: show the user and ask how to proceed.
+- Re-read `.owner` before committing, and a `take` after yours means stop and show both lines.
+- A rejected push: work with the user to correct the situation.
 
-**Fields may be added later without breaking what is already written**, which is why a record is
-a list of named fields rather than a positional line. A reader ignores fields it does not know,
-and a record missing an optional field is complete as it stands. Prose may sit beside the fields
-in a record, only the field lines are read. A record carries no version of its own, since its
-commit dates it against this file's history.
+### Fetch
 
-**A malformed record is not an error, only less useful**, and a reader takes what is there rather
-than rejecting it. A heading that lost its sender is even recoverable, since whoever wrote a
-record committed it. The one part that must be present is the `##` heading itself, because it is
-what separates one record from the next. Field lines with no heading above them are read as part
-of the record before, so an interrupted write damages its neighbour rather than itself.
+1. Ask the user, unless their permission is standing.
+2. `git fetch`, or `jj git fetch --ignore-working-copy`, since a bare jj command snapshots the
+   working copy, and that is a write.
 
-## Two modes, fast and durable
+### Send a message
 
-The message file lives in your repo either way. What differs is whether the record carries a
-permalink, and that decides both the order of the steps and how long the record stays good for.
+1. Take ownership.
+2. Append the record to `notices.md` or `topics/<topic>.md`: heading (see Record), `from:` you,
+   `to:` the recipients, the body.
+3. Append the record's inbox line to each `to:` member's `<member>.md`, in the same commit,
+   since Complete reads a missing line as done.
+4. Commit, release ownership, push when connected.
 
-- **Fast, local only.** Write the message file, add the record with `local` alone, done. No push
-  and no waiting, and the reader resolves it from their sibling clone.
-- **Durable.** Write the message file, commit and push it, then add the record with the `remote`
-  that push made resolvable.
+### Acknowledge receiving a message
 
-**The order matters only in the durable mode, and it is the step people miss.** A permalink names
-a commit, so it cannot be written before that commit exists and is pushed. Write the record first
-and you have a URL that 404s until the file catches up with it.
+Follows Read messages, once per record read.
 
-**Write a record once, when you have what goes in it.** Writing it early with an empty `remote`
-costs two writes to this repo for one message, and a reader may follow the empty one, find
-nothing, and mark it read.
+1. Take ownership.
+2. Append `read <UTC-timestamp>` to your line in your own `<member>.md`. With nothing more to
+   do, delete the line instead: done, and the commit title is `done: <heading>` (a thread
+   record gets a reply first, see Write a response).
+3. Commit, release ownership, push when connected.
 
-Which mode to use is the tradeoff in
-[The remote reference is a commit permalink](#the-remote-reference-is-a-commit-permalink) below.
-Same-day traffic between siblings is fine on local alone. Anything worth citing later wants the
-push.
+### Write a response
 
-## Whoever writes a record commits it
+1. Do what the record asks, entered in your own project's records (a Todo, a cycle), which
+   outlive the record here.
+2. Send a message: the reply record, in the same topic file, its body naming the answered
+   record's heading (see Reply) and linking the outcome in your repo.
+3. In the same commit, delete your inbox line for the answered record: done.
 
-Whoever writes a record is the one who commits it. In the same act is the ideal, since then no
-moment holds an uncommitted record, but with today's handful of friendly participants a short
-delay or batching a few writes into one commit is fine. What does not relax is the ownership:
-nobody commits someone else's writing, which is what this repo has instead of a manager, because
-ownership is per write rather than per repo.
+### Delete a complete record
 
-## Concurrent writes collide, and the collision is normal
+Yours to do when you are in its `from:`, and only once it is complete and the last line's
+deleting commit is an ancestor of `main@origin`, so that no machine deletes the only copy.
 
-Every new record goes directly below its file's header, so two writers active at the same time
-conflict at exactly the same lines. The merge is trivial, keep both records in either order, and
-it is the expected cost of newest-first rather than an error. No record depends on its
-neighbours, which is what makes the resolution safe.
+1. Take ownership.
+2. Delete the record.
+3. Commit, titled `close: <heading>` (`close: topics/<name>.md` when a finished thread's file
+   goes whole), release ownership, push when connected.
 
-## The remote reference is a commit permalink
+## What is not here
 
-The remote form is `https://github.com/<owner>/<repo>/blob/<commit-sha>/<path>#<slug>`, and the
-`<commit-sha>` is not optional.
+- No format version. Fields are additive, and a reader takes what is there.
+- No per-file persistence policy. Complete and Delete a complete record are the policy.
+- No local or remote pair and no fast or durable mode. The message is in the record, or the
+  record points at it, and there is one write, committed.
+- No broadcast rule. A record with three members in `to:` is the ordinary record.
+- No access control. Any member can modify or delete any file here. It works among friendly
+  participants, and history is the only recourse.
 
-- **A branch name rots.** A topic bookmark is deleted once its cycle lands, and the permanent
-  branch does not carry the file until then, so both forms break at exactly the moment the
-  message is worth reading.
-- **A commit SHA does not.** It survives the bookmark's deletion, survives a rebase of anything
-  after it, and resolves for a reader with no clone. GitHub's `y` key converts a branch URL into
-  this form.
-- **The local form names a path, the remote form names a version.** A local reference resolves to
-  whatever that file says now, in whatever state that working copy happens to be, and it assumes
-  the member repos are siblings of this one. A remote reference resolves to what was actually
-  sent. Local-only is fine for traffic read the same day, anything meant to be read later wants
-  the remote one.
+## Specimen
 
-## Each file's owner sets its persistence
+A record in `topics/agent-files.md`, and iiac-perf's inbox line after acknowledging.
+zc-ring-x1's line is already deleted: done, with who and when in the deleting commit.
 
-A member's file belongs to whoever receives on it. They create it, they curate it, and they
-declare at its head what becomes of a handled record. A sender needs to know none of that, only
-where to add one.
+```
+- [2026-08-29T15:21:56.260Z The agent-files set](topics/agent-files.md#2026-08-29t152156260z-the-agent-files-set) read 2026-08-29T16:02:11.004Z
+```
 
-- **Marking beats deleting, and the reason is the sender.** Whether a message was read is
-  recorded nowhere else, not in the sender's repo and not in the reader's, so a policy that marks
-  a handled record tells the sender it arrived while one that deletes it tells them nothing.
-  A recommendation, not a rule.
-- **Nothing worth keeping is ever only here.** The body is a committed file in the sender's repo,
-  and that commit carries the `ochid:` trailer linking the session that wrote it. A notification
-  record can be lost without losing anything, which is what makes owner-chosen policies safe.
-- **A file that does not exist yet is created by whoever writes first**, carrying no policy until
-  its owner declares one. Reserving creation to the owner would make the first message to a new
-  member impossible, since only the owner may create and only the sender wants to. Settled as a
-  rule at vc-x1's review (2026-08-13): the one real risk, a sender imposing a policy, is already
-  defused by the no-policy-at-birth clause.
+```
+## 2026-08-29T15:21:56.260Z The agent-files set
 
-## No protection
+- from: vc-x1
+- to: iiac-perf, zc-ring-x1
 
-Any member can modify or delete any file here. This is a cooperative store with no access
-control, so it works only among friendly participants and history is the only recourse.
+The set is proposed in vc-x1 at
+https://github.com/winksaville/vc-x1/blob/0123456789ab/notes/messages/agent-files-proposal-0827.md#proposal-2026-08-27.
+Reply with a record naming this one.
+```
