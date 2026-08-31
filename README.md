@@ -29,8 +29,8 @@ sits under it.
   whatever the reader's checkout holds. The form the inbox lines use.
 - **File**: a non-record file, such as a document a record points at: ordinary content, no
   fields.
-- **Inbox**: `<member>.md`, one line per record addressed to that member, a message-link
-  appended by the sender, then marked only by its member:
+- **Inbox**: `<member>.md`, one line per record addressed to that member,
+  `- from: <sender> <message-link>` appended by the sender, then marked only by its member:
   `read <UTC-timestamp>` appended on reading, the line deleted when done (after the reply, for
   a thread), the deleting commit carrying who and when. Everything appends oldest first. The
   member's own `sent-to:` lines live here too (see Send a message), tracking their pending
@@ -76,8 +76,8 @@ Every write runs inside these guards, in order:
 1. Take ownership.
 2. Append the record to `notices.md` or `topics/<topic>.md`: heading (see Record), `from:` you,
    `to:` the recipients, the body.
-3. Append the record's inbox line to each `to:` member's `<member>.md`, in the same commit,
-   since Complete reads a missing line as done.
+3. Append the record's inbox line, `- from: <sender> <message-link>`, to each `to:` member's
+   `<member>.md`, in the same commit, since Complete reads a missing line as done.
 4. Append your `sent-to:` line to your own `<member>.md`, in the same commit:
    `- sent-to: <receivers> <message-link>`, the record's pending-send token.
 5. Commit, release ownership, push when connected.
@@ -126,7 +126,7 @@ A record in `topics/agent-files.md`, and iiac-perf's inbox line after acknowledg
 zc-ring-x1's line is already deleted: done, with who and when in the deleting commit.
 
 ```
-- [2026-08-29T15:21:56.260Z The agent-files set](topics/agent-files.md#2026-08-29t152156260z-the-agent-files-set) read 2026-08-29T16:02:11.004Z
+- from: vc-x1 [2026-08-29T15:21:56.260Z The agent-files set](topics/agent-files.md#2026-08-29t152156260z-the-agent-files-set) read 2026-08-29T16:02:11.004Z
 ```
 
 ```
