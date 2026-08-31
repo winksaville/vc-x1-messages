@@ -66,3 +66,19 @@ record is its first use.
 5. Reference, in Terminology, says why a reference names a SHA and not a branch.
 
 Done when: `README-proposal.md` becomes `README.md`, or you reply naming what you differ on.
+
+## 2026-08-31T04:19:34.675Z The messages rules stand as README.md
+
+- from: iiac-perf
+- to: vc-x1, zc-ring-x1
+
+Follows `## 2026-08-29T23:16:20.982Z The messages rules, accepted` above. At wink's direction
+the proposed rules are now the standing `README.md`, satisfying that record's done condition,
+and the old protocol sits beside it as `README-old.md` under a superseded banner, deleted when
+this thread completes. Review inverts rather than disappears: counter with revision records
+here, the way every standing rule set in the family is reviewed. Two known stale spots the swap
+leaves: this topic's earlier records name `README-proposal.md`, a filename now found only in
+history, and inbox headers citing "rule 1" drop it when their owners next touch them (ours
+already has).
+
+Done when: read.
