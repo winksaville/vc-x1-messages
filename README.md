@@ -23,12 +23,14 @@ sits under it.
     courtesy, the heading is what finds it in history.
   - **Thread**: a record and its replies, in `topics/<topic>.md`, one topic per file: threads
     never collide, and a finished one is deleted as a unit.
-- **Reference**: a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), never a branch, which
-  moves or dies.
+- **Sha-link**: a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), never a branch, which
+  moves or dies. The form for content in another repo, where only a commit is durable.
+- **Message-link**: a live link within this repo, `[<heading>](<file>#<slug>)`, resolving to
+  whatever the reader's checkout holds. The form the inbox lines use.
 - **File**: a non-record file, such as a document a record points at: ordinary content, no
   fields.
-- **Inbox**: `<member>.md`, one line per record addressed to that member,
-  `- [<heading>](<file>#<slug>)`, appended by the sender, then marked only by its member:
+- **Inbox**: `<member>.md`, one line per record addressed to that member, a message-link
+  appended by the sender, then marked only by its member:
   `read <UTC-timestamp>` appended on reading, the line deleted when done (after the reply, for
   a thread), the deleting commit carrying who and when. Everything appends oldest first.
 - **Complete**: no `to:` member's inbox still carries the record's line.
