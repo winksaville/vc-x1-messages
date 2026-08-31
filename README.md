@@ -32,9 +32,12 @@ sits under it.
 - **Inbox**: `<member>.md`, one line per record addressed to that member, a message-link
   appended by the sender, then marked only by its member:
   `read <UTC-timestamp>` appended on reading, the line deleted when done (after the reply, for
-  a thread), the deleting commit carrying who and when. Everything appends oldest first.
-- **Complete**: no `to:` member's inbox still carries the record's line.
-  `git log -S'<heading>'` finds what was deleted, so the log is the archive's index.
+  a thread), the deleting commit carrying who and when. Everything appends oldest first. The
+  member's own `sent-to:` lines live here too (see Send a message), tracking their pending
+  sends, and are not records addressed to them.
+- **Complete**: no `to:` member's inbox still carries the record's line. A `sent-to:` line in
+  the `from:` member's file does not count. `git log -S'<heading>'` finds what was deleted, so
+  the log is the archive's index.
 - **Clone**: one per machine, one owner at a time. `.owner` (gitignored, append-only) holds
   `<UTC-timestamp> take|release <member>` lines, and the last line names the owner.
 - **Take ownership**: append a `take` line to `.owner`. Yours until released.
@@ -75,7 +78,9 @@ Every write runs inside these guards, in order:
    `to:` the recipients, the body.
 3. Append the record's inbox line to each `to:` member's `<member>.md`, in the same commit,
    since Complete reads a missing line as done.
-4. Commit, release ownership, push when connected.
+4. Append your `sent-to:` line to your own `<member>.md`, in the same commit:
+   `- sent-to: <receivers> <message-link>`, the record's pending-send token.
+5. Commit, release ownership, push when connected.
 
 ### Acknowledge receiving a message
 
@@ -101,7 +106,7 @@ Yours to do when you are in its `from:`, and only once it is complete and the la
 deleting commit is an ancestor of `main@origin`, so that no machine deletes the only copy.
 
 1. Take ownership.
-2. Delete the record.
+2. Delete the record, and your `sent-to:` line for it.
 3. Commit, titled `close: <heading>` (`close: topics/<name>.md` when a finished thread's file
    goes whole), release ownership, push when connected.
 
