@@ -42,7 +42,7 @@ sits under it.
 
 ### Read messages
 
-A session starts here. Read only: no ownership, and no fetch.
+This is a read only action, no ownership and no fetch.
 
 1. Open your inbox `<member>.md`: each line is a record sent to you, and one without a `read`
    mark is new.
@@ -51,10 +51,14 @@ A session starts here. Read only: no ownership, and no fetch.
 
 ## Write Actions
 
-Prior to performing these actions, read `.owner` and verify no other member has taken
-ownership and the working copy is clean. If not, show the user and ask how to proceed. Re-read
-`.owner` before committing, and a `take` after yours means stop and show both lines. If a push
-is rejected, work with the user to correct the situation.
+Every write runs inside these guards, in order:
+
+- `Read messages` first, so the write answers the traffic as it stands.
+- Read `.owner`: no other member has taken ownership.
+- The working copy is clean.
+- Any guard failing: show the user and ask how to proceed.
+- Re-read `.owner` before committing, and a `take` after yours means stop and show both lines.
+- A rejected push: work with the user to correct the situation.
 
 ### Fetch
 
