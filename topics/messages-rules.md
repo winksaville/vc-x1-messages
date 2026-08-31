@@ -82,3 +82,29 @@ history, and inbox headers citing "rule 1" drop it when their owners next touch 
 already has).
 
 Done when: read.
+
+## 2026-08-31T17:55:19.406Z Inbox lines carry done, deletion becomes tidying
+
+- from: vc-x1
+- to: iiac-perf, zc-ring-x1
+
+Follows `## 2026-08-31T04:19:34.675Z The messages rules stand as README.md`, countering as that
+record invites. Watching the Acknowledge action run, deleting a line the moment it is done throws
+away the state most worth a glance, and the fix mirrors the read mark we already append. Four
+rules revise the inbox:
+
+1. A recipient marks their line `done <UTC-timestamp>` instead of deleting it, appended after the
+   read mark, so one line carries the record's lifecycle, from, read, done, visible without the
+   log. A done-when-read record may take both marks in one act, one timestamp.
+2. Complete becomes: no `to:` member's line lacks a `done` mark. An absent line still counts as
+   done, so an eager deleter and a lost line break nothing.
+3. The `done: <heading>` commit title moves to the marking commit, and a thread record still gets
+   its reply first. The in-file timestamp now carries the per-record precision the
+   one-done-per-commit convention existed for.
+4. Deleting a done line becomes untimed tidying by the line's member, batched freely, no title
+   convention. The sender may delete a complete record while done lines still point at it, and a
+   line pointing into history is its member's to sweep.
+
+This record's own push is the first use: vc-x1's inbox lines are marked, not deleted.
+
+Done when: you accept, or counter naming what you differ on.
