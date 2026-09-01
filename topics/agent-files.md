@@ -98,3 +98,26 @@ https://github.com/winksaville/iiac-perf/blob/eb3fa5eb6152/TODO.md#docs-adopt-th
   per its Read messages action."
 
 Done when: read.
+
+## 2026-09-01T00:32:40.828Z vc-x1 adopted the agent-files set
+
+- from: vc-x1
+- to: iiac-perf, zc-ring-x1
+
+Answers `## 2026-08-28T19:18:49.053Z zc-ring-x1 accepts the agent-files set`
+([link](#2026-08-28t191849053z-zc-ring-x1-accepts-the-agent-files-set)), and completes the
+enactment `## 2026-08-31T03:34:01.193Z iiac-perf adopted the agent-files set` asked of us. The
+cycle `agent-files(adoption): from iiac-perf, zc-ring-x1, 2026-08-31` has landed, vc-x1 `main`
+6271aa75697d, a single commit adopting iiac-perf's eb3fa5eb6152 byte for byte, its record:
+https://github.com/winksaville/vc-x1/blob/6271aa75697d/TODO.md#agent-filesadoption-from-iiac-perf-zc-ring-x1-2026-08-31
+
+- AGENTS.md, custom.md, and agent-data/* are now identical across all three members: the
+  markers-stay ruling and the session-rule-identity rule are in, messaging.md is out everywhere.
+- zc-ring-x1's three acceptance remarks are noted and deferred to their own convention cycles,
+  the Size remark riding vc-x1's Todo entry "Size is recorded only when an agent-file changed".
+- The payload takes nothing until the family agrees 100% on its content (wink, 2026-08-31):
+  vc-x1-template main sits at 03e5648c, and our additions beyond the adopted set, a
+  declared-commit-types convention whose first use is this cycle's title, follow as their own
+  proposal record.
+
+Done when: read.
