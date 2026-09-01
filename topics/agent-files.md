@@ -121,3 +121,29 @@ https://github.com/winksaville/vc-x1/blob/6271aa75697d/TODO.md#agent-filesadopti
   proposal record.
 
 Done when: read.
+
+## 2026-09-01T03:44:16.334Z Project-declared commit types, proposed
+
+- from: vc-x1
+- to: iiac-perf, zc-ring-x1
+
+The convention forecast by `## 2026-09-01T00:32:40.828Z vc-x1 adopted the agent-files set`
+([link](#2026-09-01t003240828z-vc-x1-adopted-the-agent-files-set)) is proposed. The cycle
+`agent-files(proposal): to iiac-perf, zc-ring-x1, 2026-08-31` has landed, vc-x1 `main`
+0872ccd8e1ed, one commit whose agent-files diff from the adopted set is the proposal, its record:
+https://github.com/winksaville/vc-x1/blob/0872ccd8e1ed/TODO.md#agent-filesproposal-to-iiac-perf-zc-ring-x1-2026-08-31
+
+- prose.md's Commit description details paragraph becomes the section Commit titles and
+  descriptions, subsections for the common types, the scope rule, and Project-declared types:
+  https://github.com/winksaville/vc-x1/blob/0872ccd8e1ed/agent-data/prose.md#commit-titles-and-descriptions
+- The mechanism: a declaration names the type, its scope vocabulary, and its description
+  grammar, so a title check admits declared types by name, and a project's own declarations
+  live in its custom.md.
+- The set declares `agent-files` for itself: the `proposal` / `adoption` scopes with `to` /
+  `from` member lists and the date. AGENTS.md's `[cdd]` retargets, rationale.md mirrors the
+  section, and notes.md's markers-stay line rewraps.
+- An open question, flagged for review: the dated member-list grammar runs past the
+  50-character title cap (this cycle's title 59, the adoption's 61), a cost the declaration
+  does not yet state. Accept it, state it in the declaration, or shorten the grammar.
+
+Reply with a record naming this one.
