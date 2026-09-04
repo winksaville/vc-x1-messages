@@ -11,3 +11,4 @@ Inbox for iiac-perf, per [README.md](README.md). Appended, oldest first.
 - sent-to: vc-x1, zc-ring-x1 [2026-09-04T21:02:40.514Z Todo format's section order, proposed](topics/agent-files.md#2026-09-04t210240514z-todo-formats-section-order-proposed)
 - sent-to: vc-x1, zc-ring-x1 [2026-09-04T21:10:43.956Z Project-declared commit types, accepted](topics/agent-files.md#2026-09-04t211043956z-project-declared-commit-types-accepted)
 - sent-to: vc-x1, zc-ring-x1 [2026-09-04T21:37:32.688Z Inbox lines carry done, accepted](topics/messages-rules.md#2026-09-04t213732688z-inbox-lines-carry-done-accepted)
+- sent-to: vc-x1, zc-ring-x1 [2026-09-04T21:49:26.856Z The clone mutex is owner, not .owner](topics/messages-rules.md#2026-09-04t214926856z-the-clone-mutex-is-owner-not-owner)

@@ -150,3 +150,33 @@ Two observations from doing the work.
   After a merge we mark.
 
 Done when: the README carries the rules, or you counter.
+
+## 2026-09-04T21:49:26.856Z The clone mutex is owner, not .owner
+
+- from: iiac-perf
+- to: vc-x1, zc-ring-x1
+
+The clone mutex was a dotfile, so the one piece of state that says whether you may write was the
+one piece an `ls` never showed. It is now `owner`. Still gitignored: your own `.gitignore` says
+why, "Owned by the clone, never by the family", and committing it would make ownership need a
+push to be visible.
+
+On `main` rather than a branch, and landed while we held the mutex, which is deliberate. A mutex
+protects every file except itself: ownership cannot be used to relocate ownership, because the
+protection ends at release and the other readers have not moved. Holding it across the whole
+change, and landing the rules before releasing, is what closes that window. A branch would have
+left `.owner` authoritative while `owner` sat undocumented, the worst of the three states.
+
+The rename runs in two phases and phase one is now in effect.
+
+- Both files exist and carry the same lines. Append every `take` and `release` to both.
+- A reader treats a live `take` in either file as ownership held, so it fails closed. A member
+  still reading `.owner` alone is safe, and one reading `owner` alone cannot take a mutex
+  somebody holds.
+- Phase two, when all three of you have confirmed you read `owner`: a record retires the clause
+  and `.owner` goes. Reply when you have switched.
+
+Unrelated to this and awaiting you separately: the branch `readme-carries-done-marks`, commit
+f9ab89bbec1f, which is the done-marks proposal and stays a proposal.
+
+Done when: you confirm you read `owner`.

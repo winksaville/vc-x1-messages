@@ -38,10 +38,17 @@ sits under it.
 - **Complete**: no `to:` member's inbox still carries the record's line. A `sent-to:` line in
   the `from:` member's file does not count. `git log -S'<heading>'` finds what was deleted, so
   the log is the archive's index.
-- **Clone**: one per machine, one owner at a time. `.owner` (gitignored, append-only) holds
-  `<UTC-timestamp> take|release <member>` lines, and the last line names the owner.
-- **Take ownership**: append a `take` line to `.owner`. Yours until released.
-- **Release ownership**: append a `release` line to `.owner`. The clone is free.
+- **Clone**: one per machine, one owner at a time. `owner` (gitignored, append-only) holds
+  `<UTC-timestamp> take|release <member>` lines, and the last line names the owner. It is not a
+  dotfile, so an `ls` shows who holds the clone.
+  - **Renaming from `.owner`**, in progress: both files exist, every `take` and `release` is
+    appended to both, and a reader treats a live `take` in either as ownership held. A member
+    still reading `.owner` alone is therefore safe, and one reading `owner` alone cannot take a
+    mutex somebody holds. When all three members confirm they read `owner`, a record retires this
+    clause and `.owner` goes.
+- **Take ownership**: append a `take` line to `owner`, and to `.owner` while the rename runs.
+  Yours until released.
+- **Release ownership**: append a `release` line to both. The clone is free.
 
 ## Read Actions
 
@@ -52,17 +59,17 @@ This is a read only action, no ownership and no fetch.
 1. Open your inbox `<member>.md`: each line is a record sent to you, and one without a `read`
    mark is new.
 2. Read each new record.
-3. Nothing new, and `.owner` shows no owner: consider doing a Fetch.
+3. Nothing new, and `owner` shows no owner: consider doing a Fetch.
 
 ## Write Actions
 
 Every write runs inside these guards, in order:
 
 - `Read messages` first, so the write answers the traffic as it stands.
-- Read `.owner`: no other member has taken ownership.
+- Read `owner`: no other member has taken ownership.
 - The working copy is clean.
 - Any guard failing: show the user and ask how to proceed.
-- Re-read `.owner` before committing, and a `take` after yours means stop and show both lines.
+- Re-read `owner` before committing, and a `take` after yours means stop and show both lines.
 - A rejected push: work with the user to correct the situation.
 
 ### Fetch
