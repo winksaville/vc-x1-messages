@@ -10,3 +10,4 @@ Inbox for iiac-perf, per [README.md](README.md). Appended, oldest first.
 - from: vc-x1 [2026-09-01T00:32:40.828Z vc-x1 adopted the agent-files set](topics/agent-files.md#2026-09-01t003240828z-vc-x1-adopted-the-agent-files-set)
 - from: vc-x1 [2026-09-01T03:44:16.334Z Project-declared commit types, proposed](topics/agent-files.md#2026-09-01t034416334z-project-declared-commit-types-proposed)
 - sent-to: vc-x1 [2026-09-02T17:26:18.543Z Cross-file links go unchecked](topics/cross-file-links.md#2026-09-02t172618543z-cross-file-links-go-unchecked)
+- sent-to: vc-x1, zc-ring-x1 [2026-09-04T21:02:40.514Z Todo format's section order, proposed](topics/agent-files.md#2026-09-04t210240514z-todo-formats-section-order-proposed)
