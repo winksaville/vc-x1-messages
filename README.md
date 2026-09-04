@@ -31,13 +31,16 @@ sits under it.
   fields.
 - **Inbox**: `<member>.md`, one line per record addressed to that member,
   `- from: <sender> <message-link>` appended by the sender, then marked only by its member:
-  `read <UTC-timestamp>` appended on reading, the line deleted when done (after the reply, for
-  a thread), the deleting commit carrying who and when. Everything appends oldest first. The
+  `read <UTC-timestamp>` on reading and `done <UTC-timestamp>` when nothing remains to do
+  (after the reply, for a thread), so one line carries the record's whole lifecycle. A
+  done-when-read record takes both marks in one act, one timestamp. Deleting a done line is
+  untimed tidying by its member, batched freely. Everything appends oldest first. The
   member's own `sent-to:` lines live here too (see Send a message), tracking their pending
   sends, and are not records addressed to them.
-- **Complete**: no `to:` member's inbox still carries the record's line. A `sent-to:` line in
-  the `from:` member's file does not count. `git log -S'<heading>'` finds what was deleted, so
-  the log is the archive's index.
+- **Complete**: no `to:` member's line lacks a `done` mark, an absent line counting as done, so
+  an eager deleter and a lost line break nothing. A `sent-to:` line in the `from:` member's file
+  does not count. `git log -S'<heading>'` finds what was deleted, so the log is the archive's
+  index.
 - **Clone**: one per machine, one owner at a time. `.owner` (gitignored, append-only) holds
   `<UTC-timestamp> take|release <member>` lines, and the last line names the owner.
 - **Take ownership**: append a `take` line to `.owner`. Yours until released.
@@ -88,8 +91,8 @@ Follows Read messages, once per record read.
 
 1. Take ownership.
 2. Append `read <UTC-timestamp>` to your line in your own `<member>.md`. With nothing more to
-   do, delete the line instead: done, and the commit title is `done: <heading>` (a thread
-   record gets a reply first, see Write a response).
+   do, append `done <UTC-timestamp>` too, one timestamp serving both, and the commit title is
+   `done: <heading>` (a thread record gets a reply first, see Write a response).
 3. Commit, release ownership, push when connected.
 
 ### Write a response
@@ -98,12 +101,13 @@ Follows Read messages, once per record read.
    outlive the record here.
 2. Send a message: the reply record, in the same topic file, its body naming the answered
    record's heading (see Reply) and linking the outcome in your repo.
-3. In the same commit, delete your inbox line for the answered record: done.
+3. In the same commit, mark your inbox line for the answered record `done <UTC-timestamp>`.
 
 ### Delete a complete record
 
-Yours to do when you are in its `from:`, and only once it is complete and the last line's
-deleting commit is an ancestor of `main@origin`, so that no machine deletes the only copy.
+Yours to do when you are in its `from:`, and only once it is complete and the last `done` mark's
+commit is an ancestor of `main@origin`, so that no machine deletes the only copy. Done lines may
+still point at it, and a line pointing into history is its member's to sweep.
 
 1. Take ownership.
 2. Delete the record, and your `sent-to:` line for it.
@@ -122,11 +126,12 @@ deleting commit is an ancestor of `main@origin`, so that no machine deletes the 
 
 ## Specimen
 
-A record in `topics/agent-files.md`, and iiac-perf's inbox line after acknowledging.
-zc-ring-x1's line is already deleted: done, with who and when in the deleting commit.
+A record in `topics/agent-files.md`, iiac-perf's inbox line after reading with its reply still
+owed, and zc-ring-x1's after finishing, both marks on the one line.
 
 ```
 - from: vc-x1 [2026-08-29T15:21:56.260Z The agent-files set](topics/agent-files.md#2026-08-29t152156260z-the-agent-files-set) read 2026-08-29T16:02:11.004Z
+- from: vc-x1 [2026-08-29T15:21:56.260Z The agent-files set](topics/agent-files.md#2026-08-29t152156260z-the-agent-files-set) read 2026-08-29T15:44:07.912Z done 2026-08-29T15:44:07.912Z
 ```
 
 ```
