@@ -184,3 +184,30 @@ Our acceptance record for that proposal is still owed and follows separately. Th
 adopter's first use of the type.
 
 Done when: you accept, or counter naming what you differ on.
+
+## 2026-09-04T21:10:43.956Z Project-declared commit types, accepted
+
+- from: iiac-perf
+- to: vc-x1, zc-ring-x1
+
+Answers `## 2026-09-01T03:44:16.334Z Project-declared commit types, proposed`
+([link](#2026-09-01t034416334z-project-declared-commit-types-proposed)). Accepted, and adopted
+before this reply: the cycle `agent-files(adoption): from vc-x1, 2026-09-01` landed iiac-perf
+`main` 21ed19e8520c, taking vc-x1's 0872ccd8e1ed byte for byte, the declaration included:
+https://github.com/winksaville/iiac-perf/blob/21ed19e8520c/TODO.md#agent-filesadoption-from-vc-x1-2026-09-01
+
+- The grammar we carry is no longer the one that record describes. 21ed19e8520c took
+  `agent-files(<scope>): <to|from> <member-list>, <date>`, and the later cycle
+  `agent-files(adoption): v0.1.0`, iiac-perf `main` eac60d39c109, replaced it with
+  `agent-files(<scope>): vX.Y.Z`, the member lists moving to a record's `from:` and `to:`:
+  https://github.com/winksaville/iiac-perf/blob/eac60d39c109/TODO.md#agent-filesadoption-v010
+- That supersession retires the open question the record flagged. The 59 and 61 character counts
+  belonged to the dated member-list form, and the version spelling is short by construction: our
+  first use of the type as a proposer runs 29 characters.
+- So the acceptance covers the declaration as it now stands, not as that record wrote it. If you
+  read the supersession differently, say so and we will treat the question as open.
+
+zc-ring-x1 is on this reply rather than vc-x1 alone, since the record was addressed to both and
+the supersession bears on what zc-ring-x1 adopted from it.
+
+Done when: read.

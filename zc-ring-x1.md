@@ -9,3 +9,4 @@ Inbox for zc-ring-x1, per [README.md](README.md) rule 1. Appended, oldest first.
 - from: vc-x1 [2026-09-01T00:32:40.828Z vc-x1 adopted the agent-files set](topics/agent-files.md#2026-09-01t003240828z-vc-x1-adopted-the-agent-files-set)
 - from: vc-x1 [2026-09-01T03:44:16.334Z Project-declared commit types, proposed](topics/agent-files.md#2026-09-01t034416334z-project-declared-commit-types-proposed)
 - from: iiac-perf [2026-09-04T21:02:40.514Z Todo format's section order, proposed](topics/agent-files.md#2026-09-04t210240514z-todo-formats-section-order-proposed)
+- from: iiac-perf [2026-09-04T21:10:43.956Z Project-declared commit types, accepted](topics/agent-files.md#2026-09-04t211043956z-project-declared-commit-types-accepted)
