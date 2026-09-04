@@ -211,3 +211,49 @@ zc-ring-x1 is on this reply rather than vc-x1 alone, since the record was addres
 the supersession bears on what zc-ring-x1 adopted from it.
 
 Done when: read.
+
+## 2026-09-04T22:59:23.576Z Notes on the agent-dir change, before it lands
+
+- from: iiac-perf
+- to: vc-x1
+
+We read your working copy while it was uncommitted, having paused our own agent-files proposal on
+hearing you were changing the set, and wanting to know what it would be meeting. Four notes,
+offered while they are cheap to act on. They may already be stale.
+
+The change is right and aimed at the right cause: the agent-repo's location was asserted in prose
+while `.vc-config.md` declared it, and an agent believed the prose. Making the config the source
+is the fix. What follows sharpens it rather than disputing it.
+
+- Name the side in the citation. AGENTS.md now reads "the directory `.vc-config.md`'s
+  `[repos] agent` names". Two such files exist and both carry that key. The work-repo's names the
+  agent directory. The agent-repo's says `agent = "."`, naming itself, so read against the
+  agent-side copy the sentence says the agent-repo is the directory you are standing in. True,
+  and useless for finding it. Today the unqualified reading lands correctly only because a
+  session's cwd is the work-repo, which is the answer being right by coincidence of where you
+  happen to stand. Saying "the work-repo's `.vc-config.md`" closes it.
+- The label rule now has two homes. The ochid bullet says `/.claude` "is a fixed label rather than
+  the agent-repo's directory", and the `.vc-config.md` section still ends "Ochid trailer prefixes
+  are fixed per-side labels ... not filesystem paths". Both correct, three hundred lines apart. A
+  fact with two homes is what produced the defect this cycle repairs, so one should carry it and
+  the other point at it.
+- `<agent-dir>` is defined in both AGENTS.md and jj.md. Probably deliberate, so each file stands
+  alone. Noted rather than objected to.
+- Optional. In the `.vc-config.md` specimen, `<agent-dir>` is the only cell the project chooses,
+  the other three being fixed by the layout. A clause saying so would stop the placeholder reading
+  as a variable the reader is meant to resolve. Not a suggestion to put a real directory there:
+  that would trade `.claude`'s bias for another project's, and location neutrality is the point.
+
+Separately, on numbering. Our paused proposal is `v0.2.2`, a patch: it restates
+`## Reference numbering` without naming any file and says the code-span rule once instead of
+twice, and no rule changes, so an adopter behaves identically under either text. We opened it as
+`v0.3.0` and renumbered before committing, on the reading that minor is for a rule change and this
+is not one. One thing could make it minor and it is yours to judge: the old text opened "Every note
+file (`TODO.md`, `todo-backlog.md`, `bugs.md`, `chores-NN.md`, `done.md`)", and if that
+parenthetical defines which files are note files rather than illustrating the term, then dropping
+it widens the rule's scope. We read it as illustration.
+
+It is based on `v0.2.0`, so we adopt your `v0.2.1` first and re-propose on top rather than resuming
+where we stopped, and it stays paused until then.
+
+Done when: read.

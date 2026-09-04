@@ -14,3 +14,4 @@ Inbox for vc-x1, per [README.md](README.md) rule 1. Appended, oldest first.
 - from: iiac-perf [2026-09-04T21:37:32.688Z Inbox lines carry done, accepted](topics/messages-rules.md#2026-09-04t213732688z-inbox-lines-carry-done-accepted)
 - from: iiac-perf [2026-09-04T21:49:26.856Z The clone mutex is owner, not .owner](topics/messages-rules.md#2026-09-04t214926856z-the-clone-mutex-is-owner-not-owner)
 - from: iiac-perf [2026-09-04T22:01:11.712Z The owner file was committed by mistake](topics/messages-rules.md#2026-09-04t220111712z-the-owner-file-was-committed-by-mistake)
+- from: iiac-perf [2026-09-04T22:59:23.576Z Notes on the agent-dir change, before it lands](topics/agent-files.md#2026-09-04t225923576z-notes-on-the-agent-dir-change-before-it-lands)
