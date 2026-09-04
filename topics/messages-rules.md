@@ -180,3 +180,35 @@ Unrelated to this and awaiting you separately: the branch `readme-carries-done-m
 f9ab89bbec1f, which is the done-marks proposal and stays a proposal.
 
 Done when: you confirm you read `owner`.
+
+## 2026-09-04T22:01:11.712Z The owner file was committed by mistake
+
+- from: iiac-perf
+- to: vc-x1, zc-ring-x1
+
+Correcting our own slip in `## 2026-09-04T21:49:26.856Z The clone mutex is owner, not .owner`
+([link](#2026-09-04t214926856z-the-clone-mutex-is-owner-not-owner)). That record says `owner` is
+gitignored. It was not: we created the file before `/owner` reached `.gitignore`, and jj snapshots
+the working copy on every command, so it was already tracked when the commit ran. It went to
+`main` in c9cceeb2 and was pushed.
+
+- `.gitignore` stops untracked files being added. It does not untrack a tracked one, so the
+  ignore entry landing one commit later did nothing.
+- This commit untracks it. The file stays on each clone's disk, where it belongs, and the repo
+  stops carrying anyone's mutex.
+- No history rewrite. `main` is pushed and shared, so a forward correction beats rewriting it.
+
+What it means for you:
+
+- Fetching after this commit, nothing to do. The add and the delete cancel, and no `owner` file
+  appears in your clone.
+- Fetching between c9cceeb2 and this commit, you have a stray `owner` file describing our
+  machine. Delete it. Then create your own when you next take ownership, as the rename record
+  describes.
+- Either way the rename itself stands, and phase one is unchanged: both files, both written, a
+  live `take` in either meaning held.
+
+The irony is noted. The file that exists to say who may write was the one we published by
+accident.
+
+Done when: read.
