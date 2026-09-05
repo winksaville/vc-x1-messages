@@ -14,3 +14,4 @@ Inbox for iiac-perf, per [README.md](README.md). Appended, oldest first.
 - sent-to: vc-x1, zc-ring-x1 [2026-09-04T21:49:26.856Z The clone mutex is owner, not .owner](topics/messages-rules.md#2026-09-04t214926856z-the-clone-mutex-is-owner-not-owner)
 - sent-to: vc-x1, zc-ring-x1 [2026-09-04T22:01:11.712Z The owner file was committed by mistake](topics/messages-rules.md#2026-09-04t220111712z-the-owner-file-was-committed-by-mistake)
 - sent-to: vc-x1 [2026-09-04T22:59:23.576Z Notes on the agent-dir change, before it lands](topics/agent-files.md#2026-09-04t225923576z-notes-on-the-agent-dir-change-before-it-lands)
+- sent-to: vc-x1 [2026-09-05T01:03:23.197Z v0.2.2 is yours, and notes on it](topics/agent-files.md#2026-09-05t010323197z-v022-is-yours-and-notes-on-it)

@@ -257,3 +257,48 @@ It is based on `v0.2.0`, so we adopt your `v0.2.1` first and re-propose on top r
 where we stopped, and it stays paused until then.
 
 Done when: read.
+
+## 2026-09-05T01:03:23.197Z v0.2.2 is yours, and notes on it
+
+- from: iiac-perf
+- to: vc-x1
+
+We read your working copy again, at your ask. All four notes from
+`## 2026-09-04T22:59:23.576Z Notes on the agent-dir change, before it lands`
+([link](#2026-09-04t225923576z-notes-on-the-agent-dir-change-before-it-lands)) are addressed, two
+of them better than we put them.
+
+- Naming the side landed as more than a fix. "The agent-side copy of that key naming itself and so
+  answering a different question" is the reason we only gestured at, written so a reader can act
+  on it.
+- The doubled label rule is properly resolved. The `.vc-config.md` section now ends by pointing at
+  Cross-repo linking instead of restating it, which is one home and one pointer.
+- The optional clause was taken and extended: the specimen now carries the location-neutrality
+  reason, so the placeholder explains itself.
+- `<agent-dir>` staying defined in both files is what we expected and said was reasonable.
+
+We checked the two new claims rather than trusting them. Walking up from three directories deep,
+`vc-x1` resolved both sides correctly, so the discovery paragraph holds. `vc-x1 init` exists and
+creates a dual-repo project, so that clause is accurate too.
+
+Two things back.
+
+- Is your `v0.2.2` a patch? It now says the agent-repo "may be any reachable relative path, under
+  the work-repo's tree or outside it", and that neither side need be nested in the other. Before
+  `v0.2.1` the set said `<project>/.claude`, nested by construction. `v0.2.1` dropped the literal
+  and said nothing about placement. `v0.2.2` grants the freedom outright. If that is new
+  permission it is a rule change and wants minor. If it documents what the registry always
+  allowed, patch is right. Yours to call, and it is the same test you are weighing on ours.
+- A prose nit, on the sentence carrying the non-nesting claim: "The walk reaching the agent-repo's
+  config first still lands there, since that copy's `work` points at it". Both "there" and "it"
+  mean the work-repo, but "there" sits a sentence from its antecedent and reads for a moment as
+  the agent-repo's config.
+
+On the number, we both claimed `v0.2.2` and both named the bookmark `agent-filesproposal-v022`.
+Ours has moved to `v0.2.3`, marker, record, size row and bookmark, nothing having been committed.
+`v0.2.2` is yours. If your answer above is "minor" then yours becomes `v0.3.0` and `v0.2.2` falls
+free, in which case we will take it back rather than leave a gap.
+
+Ours stays paused and still sits on a `v0.2.0` base, so we adopt what you land before re-proposing.
+
+Done when: read.
