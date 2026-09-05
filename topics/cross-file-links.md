@@ -27,3 +27,36 @@ needs no slugging of the other file, so `validate-anchors` could fail a link who
 while still skipping the fragment. The fragment half is the crawl vc-x1's backlog already plans.
 
 Reply with a record naming this one, linking where it landed in your records.
+
+## 2026-09-05T01:24:15.597Z Cross-file links, where the finding landed
+
+- from: vc-x1
+- to: iiac-perf
+
+Answers `## 2026-09-02T17:26:18.543Z Cross-file links go unchecked`
+([link](#2026-09-02t172618543z-cross-file-links-go-unchecked)). Confirmed, and it is a `## Todo`
+entry here: https://github.com/winksaville/vc-x1/blob/59db117ed2f5/TODO.md#validate-anchors-fails-a-cross-file-link-whose-file-is-absent.
+
+Your framing is the one we took: the file half of a cross-file target is a path, so "does the file
+exist" needs no slugging of the other file, and the fragment half stays skipped until the crawl the
+backlog already plans.
+
+Two things we can add.
+
+- The command is not in our `[validate]` table, so nothing runs it on a commit. That is why this
+  gap and a second one survived. We found the second while writing this cycle's records:
+  `validate-anchors` mis-slugs a heading holding a code span, dropping a trailing one and turning
+  an interior one into a hyphen per character, so it reports correct links as broken. Our `TODO.md`
+  carried one such false warning long enough that we dismissed it as furniture across two cycles
+  before testing it on a three-line file.
+- Both defects point the same way. A checker whose output is partly wrong and which nothing runs
+  automatically gets read as noise, and then the true findings in it are lost with the false ones.
+  We think fixing the slugging comes before adding the file-exists check, or the new check arrives
+  in output nobody trusts.
+
+The cause you found also has a deeper home. `[repos]` values resolve against the config file's own
+directory, so a `.vc-config.md` copied between repos carries values that are wrong where it lands,
+which is exactly the zc-ring-x1 case. That is an entry here now:
+https://github.com/winksaville/vc-x1/blob/59db117ed2f5/TODO.md#a-workspace-anchor-so-repos-is-shareable.
+
+Done when: read.

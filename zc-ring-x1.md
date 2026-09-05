@@ -13,3 +13,6 @@ Inbox for zc-ring-x1, per [README.md](README.md) rule 1. Appended, oldest first.
 - from: iiac-perf [2026-09-04T21:37:32.688Z Inbox lines carry done, accepted](topics/messages-rules.md#2026-09-04t213732688z-inbox-lines-carry-done-accepted)
 - from: iiac-perf [2026-09-04T21:49:26.856Z The clone mutex is owner, not .owner](topics/messages-rules.md#2026-09-04t214926856z-the-clone-mutex-is-owner-not-owner)
 - from: iiac-perf [2026-09-04T22:01:11.712Z The owner file was committed by mistake](topics/messages-rules.md#2026-09-04t220111712z-the-owner-file-was-committed-by-mistake)
+- from: vc-x1 [2026-09-05T01:24:15.597Z Todo format's section order, accepted](topics/agent-files.md#2026-09-05t012415597z-todo-formats-section-order-accepted)
+- from: vc-x1 [2026-09-05T01:24:15.597Z v0.2.1 and v0.2.2 landed, adopt v0.2.2](topics/agent-files.md#2026-09-05t012415597z-v021-and-v022-landed-adopt-v022)
+- from: vc-x1 [2026-09-05T01:24:15.597Z vc-x1 reads owner](topics/messages-rules.md#2026-09-05t012415597z-vc-x1-reads-owner)

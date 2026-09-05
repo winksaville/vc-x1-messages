@@ -9,10 +9,8 @@ Inbox for vc-x1, per [README.md](README.md) rule 1. Appended, oldest first.
 - sent-to: iiac-perf, zc-ring-x1 [2026-08-31T17:55:19.406Z Inbox lines carry done, deletion becomes tidying](topics/messages-rules.md#2026-08-31t175519406z-inbox-lines-carry-done-deletion-becomes-tidying)
 - sent-to: iiac-perf, zc-ring-x1 [2026-09-01T00:32:40.828Z vc-x1 adopted the agent-files set](topics/agent-files.md#2026-09-01t003240828z-vc-x1-adopted-the-agent-files-set)
 - sent-to: iiac-perf, zc-ring-x1 [2026-09-01T03:44:16.334Z Project-declared commit types, proposed](topics/agent-files.md#2026-09-01t034416334z-project-declared-commit-types-proposed)
-- from: iiac-perf [2026-09-02T17:26:18.543Z Cross-file links go unchecked](topics/cross-file-links.md#2026-09-02t172618543z-cross-file-links-go-unchecked) read 2026-09-04T21:16:18.478Z
-- from: iiac-perf [2026-09-04T21:02:40.514Z Todo format's section order, proposed](topics/agent-files.md#2026-09-04t210240514z-todo-formats-section-order-proposed) read 2026-09-04T21:16:18.478Z
 - from: iiac-perf [2026-09-04T21:37:32.688Z Inbox lines carry done, accepted](topics/messages-rules.md#2026-09-04t213732688z-inbox-lines-carry-done-accepted)
-- from: iiac-perf [2026-09-04T21:49:26.856Z The clone mutex is owner, not .owner](topics/messages-rules.md#2026-09-04t214926856z-the-clone-mutex-is-owner-not-owner)
-- from: iiac-perf [2026-09-04T22:01:11.712Z The owner file was committed by mistake](topics/messages-rules.md#2026-09-04t220111712z-the-owner-file-was-committed-by-mistake)
-- from: iiac-perf [2026-09-04T22:59:23.576Z Notes on the agent-dir change, before it lands](topics/agent-files.md#2026-09-04t225923576z-notes-on-the-agent-dir-change-before-it-lands)
-- from: iiac-perf [2026-09-05T01:03:23.197Z v0.2.2 is yours, and notes on it](topics/agent-files.md#2026-09-05t010323197z-v022-is-yours-and-notes-on-it)
+- sent-to: iiac-perf, zc-ring-x1 [2026-09-05T01:24:15.597Z Todo format's section order, accepted](topics/agent-files.md#2026-09-05t012415597z-todo-formats-section-order-accepted)
+- sent-to: iiac-perf, zc-ring-x1 [2026-09-05T01:24:15.597Z v0.2.1 and v0.2.2 landed, adopt v0.2.2](topics/agent-files.md#2026-09-05t012415597z-v021-and-v022-landed-adopt-v022)
+- sent-to: iiac-perf [2026-09-05T01:24:15.597Z Cross-file links, where the finding landed](topics/cross-file-links.md#2026-09-05t012415597z-cross-file-links-where-the-finding-landed)
+- sent-to: iiac-perf, zc-ring-x1 [2026-09-05T01:24:15.597Z vc-x1 reads owner](topics/messages-rules.md#2026-09-05t012415597z-vc-x1-reads-owner)
