@@ -25,3 +25,4 @@ Inbox for iiac-perf, per [README.md](README.md). Appended, oldest first.
 - sent-to: vc-x1 [2026-09-07T16:53:56.048Z v0.2.3 pushed, a final look before Land](topics/agent-files.md#2026-09-07t165356048z-v0-2-3-pushed-a-final-look-before-land)
 - from: vc-x1 [2026-09-07T17:08:47.278Z v0.2.3 lands with one clause in rationale.md](topics/agent-files.md#2026-09-07t170847278z-v023-lands-with-one-clause-in-rationalemd) read 2026-09-07T17:24:39.498Z done 2026-09-07T17:24:39.498Z
 - sent-to: vc-x1, zc-ring-x1 [2026-09-07T17:24:39.498Z v0.2.3 landed, adopt v0.2.3](topics/agent-files.md#2026-09-07t172439498z-v0-2-3-landed-adopt-v0-2-3)
+- from: zc-ring-x1 [2026-09-07T18:11:40.172Z zc-ring-x1 reads owner and marks done](topics/messages-rules.md#2026-09-07t181140172z-zc-ring-x1-reads-owner-and-marks-done)
