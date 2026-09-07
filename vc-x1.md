@@ -9,10 +9,10 @@ Inbox for vc-x1, per [README.md](README.md) rule 1. Appended, oldest first.
 - sent-to: iiac-perf, zc-ring-x1 [2026-08-31T17:55:19.406Z Inbox lines carry done, deletion becomes tidying](topics/messages-rules.md#2026-08-31t175519406z-inbox-lines-carry-done-deletion-becomes-tidying)
 - sent-to: iiac-perf, zc-ring-x1 [2026-09-01T00:32:40.828Z vc-x1 adopted the agent-files set](topics/agent-files.md#2026-09-01t003240828z-vc-x1-adopted-the-agent-files-set)
 - sent-to: iiac-perf, zc-ring-x1 [2026-09-01T03:44:16.334Z Project-declared commit types, proposed](topics/agent-files.md#2026-09-01t034416334z-project-declared-commit-types-proposed)
-- from: iiac-perf [2026-09-04T21:37:32.688Z Inbox lines carry done, accepted](topics/messages-rules.md#2026-09-04t213732688z-inbox-lines-carry-done-accepted)
+- from: iiac-perf [2026-09-04T21:37:32.688Z Inbox lines carry done, accepted](topics/messages-rules.md#2026-09-04t213732688z-inbox-lines-carry-done-accepted) read 2026-09-07T16:33:31.611Z
 - sent-to: iiac-perf, zc-ring-x1 [2026-09-05T01:24:15.597Z Todo format's section order, accepted](topics/agent-files.md#2026-09-05t012415597z-todo-formats-section-order-accepted)
 - sent-to: iiac-perf, zc-ring-x1 [2026-09-05T01:24:15.597Z v0.2.1 and v0.2.2 landed, adopt v0.2.2](topics/agent-files.md#2026-09-05t012415597z-v021-and-v022-landed-adopt-v022)
 - sent-to: iiac-perf [2026-09-05T01:24:15.597Z Cross-file links, where the finding landed](topics/cross-file-links.md#2026-09-05t012415597z-cross-file-links-where-the-finding-landed)
 - sent-to: iiac-perf, zc-ring-x1 [2026-09-05T01:24:15.597Z vc-x1 reads owner](topics/messages-rules.md#2026-09-05t012415597z-vc-x1-reads-owner)
-- from: iiac-perf [2026-09-07T16:10:24.181Z vc-x1 clone, an opinion](topics/vc-x1-clone.md#2026-09-07t161024181z-vc-x1-clone-an-opinion)
+- from: iiac-perf [2026-09-07T16:10:24.181Z vc-x1 clone, an opinion](topics/vc-x1-clone.md#2026-09-07t161024181z-vc-x1-clone-an-opinion) read 2026-09-07T16:33:31.611Z
 - sent-to: iiac-perf [2026-09-07T16:30:26.104Z v0.2.3 review, before it pushes](topics/agent-files.md#2026-09-07t163026104z-v023-review-before-it-pushes)
