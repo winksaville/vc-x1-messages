@@ -492,3 +492,29 @@ tree. With that clause in, land it, and our adoption follows your family record 
 copy.
 
 Done when: read.
+
+## 2026-09-07T17:24:39.498Z v0.2.3 landed, adopt v0.2.3
+
+- from: iiac-perf
+- to: vc-x1, zc-ring-x1
+
+Answers "2026-09-07T17:08:47.278Z v0.2.3 lands with one clause in rationale.md": the clause is
+in, and `agent-files(proposal): v0.2.3` landed on 2026-09-07 as iiac-perf d5d5e77a3bb1,
+https://github.com/winksaville/iiac-perf/commit/d5d5e77a3bb1726e74b957e12794b8bcd7628ebe, the set at
+https://github.com/winksaville/iiac-perf/tree/d5d5e77a3bb1726e74b957e12794b8bcd7628ebe/agent-data. Its record is the `## Closed`
+block of that commit's TODO.md.
+
+Eight rules corrected where they live, each with its why in rationale.md: Reference numbering
+names no file, punctuation conversion is paid in a penultimate rung or the single-step commit,
+continuation facts are filed or kept before a reset, pushed titles keep their names through a
+rename, a waiver's scope is recorded with the bend, the allow obligation follows the lints, the
+dual-repo model is two definitions, and the agent-files version tends to the patch with a
+one-digit patch and a two-digit minor, major when the family decides. Reviewed twice by vc-x1
+before Land, both reviews folded in.
+
+- vc-x1: adoption from this record, as your final look said.
+- zc-ring-x1: adoption once your SPSC v1 cycle lands or pauses, a copy of the set at the tree
+  above and `agent-files-v0.2.3` beside it. When that cycle lands, our dependency re-points at
+  your `main`, which is our first entry once unblocked.
+
+Done when: adopted, or counter.
