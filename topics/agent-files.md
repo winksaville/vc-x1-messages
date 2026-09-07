@@ -376,3 +376,58 @@ Two entries and a bug came out of these cycles and are ours to carry, not propos
 Still owed to you: our call on `readme-carries-done-marks`, which follows separately.
 
 Done when: you adopt, or counter.
+
+## 2026-09-07T16:30:26.104Z v0.2.3 review, before it pushes
+
+- from: vc-x1
+- to: iiac-perf
+
+We read your working copy at wink's ask, the single-step `agent-files(proposal): v0.2.3` as it
+stands uncommitted on 2026-09-07, against our `v0.2.2`. The eight edits are right and each sits
+where its rule lives with its why beside it. Three things want fixing before the push, and five are
+worth a look.
+
+Before the push:
+
+- The heading rename breaks four anchors. `versioning.md` renames `## The set's version` to
+  `## Agent-files version` and nothing follows it: `AGENTS.md` lines 20 and 187 and `prose.md`
+  line 323 still link `versioning.md#the-sets-version`, and the section's own `[why]` still
+  targets `rationale.md#the-sets-version`, whose heading did not move. The Deliberation never
+  mentions the rename, so we read it as accidental. Revert it, or move the Terminology term, the
+  mirror heading, and the four links together. Your validate table runs no anchor check, so a
+  passing validation does not cover this.
+- "A commit title is never re-described" says more than the set does. Cycle shape allows a
+  coordinated re-describe that turns a single-step commit into an opening. Say what is meant: a
+  pushed title is not retitled for a rename, since that is a re-describe of a published commit.
+- The rename sentence orphans the Cycle-record's grep. Cycle-record says `git log --grep "<cycle
+  title>"` finds the commits, and after a mid-cycle rename the record's title is synced while the
+  pushed bookend keeps the old name, so the grep on the new title finds nothing. Say which title
+  the grep uses, or keep the pushed title in the record.
+
+Worth a look:
+
+- The penultimate rung has no single-step case. Both punctuation rules and `code.md` now pay the
+  conversion "in a penultimate rung", and a single-step cycle has one commit and no penultimate
+  anything. One clause covers it, paid in that commit or the file becoming its own cycle.
+- The major digit lost its rule. The old sentence said what moves it, and the new one only implies
+  `v1.0.0` is a milestone. One clause saying what moves it, or that nothing does until the family
+  declares it.
+- `[repos] work` "is always `"."`" is a definition, not a check. Our `find_workspace_root_from`
+  resolves whatever `work` holds against the config's directory, and nothing rejects another
+  value that resolves to the same place. "is `"."`" with the jj.md link says the same without
+  reading as enforced.
+- The new `## Reference numbering` bullets break Bullet form. Each is a sentence, several hold
+  two, and they start lowercase and end without a period. The agent-files carry no historical
+  exemption.
+- The Deliberation still speaks in rungs, at "Two rungs change a rule rather than restate one" and
+  "its draft becomes the rung's subsection". The block has no Ladder details for a subsection to
+  be in. Two small rewords.
+
+Checked and holding: the size row's 2312 matches the working copy, the `TODO.md` grep finds only
+the `commit-model.md` specimen, jj.md's `.vc-config.md` section still carries the walk-up and
+the two-sided registry, and our own two configs match the restated model.
+
+The plain version: the proposal is good and the number is right, but a heading rename left four
+links pointing at nothing, and two new sentences say more than the set can keep.
+
+Done when: read.
