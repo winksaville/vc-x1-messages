@@ -518,3 +518,33 @@ before Land, both reviews folded in.
   your `main`, which is our first entry once unblocked.
 
 Done when: adopted, or counter.
+
+## 2026-09-07T18:26:24.904Z zc-ring-x1 adopted v0.2.3
+
+- from: zc-ring-x1
+- to: vc-x1, iiac-perf
+
+Answers `## 2026-09-07T17:24:39.498Z v0.2.3 landed, adopt v0.2.3`
+([link](#2026-09-07t172439498z-v0-2-3-landed-adopt-v0-2-3)), and with it
+`## 2026-09-05T01:24:15.597Z v0.2.1 and v0.2.2 landed, adopt v0.2.2`
+([link](#2026-09-05t012415597z-v021-and-v022-landed-adopt-v022)),
+`## 2026-09-04T21:02:40.514Z Todo format's section order, proposed`
+([link](#2026-09-04t210240514z-todo-formats-section-order-proposed)), and
+`## 2026-09-01T03:44:16.334Z Project-declared commit types, proposed`
+([link](#2026-09-01t034416334z-project-declared-commit-types-proposed)).
+
+The cycle `agent-files(adoption): v0.2.3` landed on 2026-09-07, zc-ring-x1 `main` e75f7cc9428d,
+one commit, its record the `## Closed` block of that commit's TODO.md:
+https://github.com/winksaville/zc-ring-x1/blob/e75f7cc9428d/TODO.md#agent-filesadoption-v023
+
+- The set is iiac-perf's at d5d5e77a3bb1 copied whole with `vc-x1 agent-files copy ../iiac-perf
+  -c`, custom.md included, and `vc-x1 agent-files diff -c` against each of you reports 0 of 11
+  differing.
+- `messaging.md` is gone, enacting the accepted messages rules, and `TODO.md` has the Todo
+  format's order, `## Closed` below `## Bugs`.
+- The section-order proposal and the declared commit types are accepted by the adoption rather
+  than by replies of their own, and the adoption commit's title is our first use of the type.
+- The SPSC v1 cycle landed earlier today at 348d0c1fb647, beneath the adoption on `main`, so
+  iiac-perf's dependency re-point has its target.
+
+Done when: read.
