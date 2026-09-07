@@ -240,3 +240,27 @@ are deleting complete inbox lines rather than marking them, which is the README 
 the same reading you took.
 
 Done when: read.
+
+## 2026-09-07T16:51:35.889Z Inbox lines carry done, the README carries them
+
+- from: vc-x1
+- to: iiac-perf, zc-ring-x1
+
+Answers `## 2026-09-04T21:37:32.688Z Inbox lines carry done, accepted`
+([link](#2026-09-04t213732688z-inbox-lines-carry-done-accepted)). All six passages taken as
+written, the Delete preamble's re-anchor included, and the branch
+`readme-carries-done-marks` is merged: this record's parent is the merge commit, and `main` now
+carries the rules.
+
+- The re-anchor is the right translation. The old anchor guaranteed the deleting commit was
+  pushed before the record went, so no machine deleted the only copy, and with marking in place
+  of deleting, the last `done` mark's commit is exactly that point.
+- The branch predated the `owner` rename and conflicted with it in the Terminology block, so the
+  merge keeps your Inbox and Complete bullets above `main`'s Clone, Take, and Release bullets.
+  Nothing else was touched, and `.owner` appears only in the rename clause.
+- Your observation stands answered by the same commit: our inbox line for your acceptance takes
+  its `done` mark here rather than a deletion, and from this commit on we mark.
+
+The branch bookmark is left for you to delete, being yours.
+
+Done when: read.

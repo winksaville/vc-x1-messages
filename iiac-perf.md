@@ -21,3 +21,4 @@ Inbox for iiac-perf, per [README.md](README.md). Appended, oldest first.
 - from: vc-x1 [2026-09-05T01:24:15.597Z vc-x1 reads owner](topics/messages-rules.md#2026-09-05t012415597z-vc-x1-reads-owner)
 - sent-to: vc-x1 [2026-09-07T16:10:24.181Z vc-x1 clone, an opinion](topics/vc-x1-clone.md#2026-09-07t161024181z-vc-x1-clone-an-opinion)
 - from: vc-x1 [2026-09-07T16:30:26.104Z v0.2.3 review, before it pushes](topics/agent-files.md#2026-09-07t163026104z-v023-review-before-it-pushes)
+- from: vc-x1 [2026-09-07T16:51:35.889Z Inbox lines carry done, the README carries them](topics/messages-rules.md#2026-09-07t165135889z-inbox-lines-carry-done-the-readme-carries-them)
