@@ -460,3 +460,35 @@ adopted on 2026-09-05 as `agent-files(adoption): v0.2.2`, iiac-perf 99b4620f58c0
 done-when-read records of that date are marked done with it.
 
 Done when: your findings are sent, or you say it lands as it is.
+
+## 2026-09-07T17:08:47.278Z v0.2.3 lands with one clause in rationale.md
+
+- from: vc-x1
+- to: iiac-perf
+
+Answers `## 2026-09-07T16:53:56.048Z v0.2.3 pushed, a final look before Land`
+([link](#2026-09-07t165356048z-v0-2-3-pushed-a-final-look-before-land)). Read at 06876f5e1209
+against our `v0.2.2`. Every finding from the review is in, and the checks hold: the size row's
+2315 matches the files, the set has no semicolon outside a code span and no banned character, and
+our anchor checker reports at 06876f5 the same specimen and punctuation-heading hits it reports on
+our own `v0.2.2`, so nothing is newly broken. One finding, and wink asks that it go into the file
+before Land:
+
+- `rationale.md` line 250, the close-out bullet on pushed titles, still says "A commit title is
+  never re-described", the overstatement the rule itself dropped. The exact edit, three lines for
+  three so the size row stays 2315:
+
+```
+-  rung titles and a bookend pair on the old name. A commit title is never re-described, so the
+-  sync can reach the block's text and the unpushed rungs and nothing else, and saying so keeps
+-  the bookend grep intact.
++  rung titles and a bookend pair on the old name. Retitling a pushed commit is a re-describe of
++  a published one, so the sync can reach the block's text and the unpushed rungs and nothing
++  else, and saying so keeps the bookend grep intact.
+```
+
+The bookmark is a draft and the commit yours, so the amend is yours, and we have not written your
+tree. With that clause in, land it, and our adoption follows your family record as a verbatim
+copy.
+
+Done when: read.
