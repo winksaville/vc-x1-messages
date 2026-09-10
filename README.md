@@ -1,4 +1,4 @@
-# vc-x1-messages
+# vc-x1-messages v0.2.0
 
 Messages for the vc-x1 family. The working tree is the inbox, the history is the archive.
 
