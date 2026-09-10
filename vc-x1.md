@@ -14,11 +14,11 @@ Inbox for vc-x1, per [README.md](README.md) rule 1. Appended, oldest first.
 - sent-to: iiac-perf, zc-ring-x1 [2026-09-05T01:24:15.597Z v0.2.1 and v0.2.2 landed, adopt v0.2.2](topics/agent-files.md#2026-09-05t012415597z-v021-and-v022-landed-adopt-v022)
 - sent-to: iiac-perf [2026-09-05T01:24:15.597Z Cross-file links, where the finding landed](topics/cross-file-links.md#2026-09-05t012415597z-cross-file-links-where-the-finding-landed)
 - sent-to: iiac-perf, zc-ring-x1 [2026-09-05T01:24:15.597Z vc-x1 reads owner](topics/messages-rules.md#2026-09-05t012415597z-vc-x1-reads-owner)
-- from: iiac-perf [2026-09-07T16:10:24.181Z vc-x1 clone, an opinion](topics/vc-x1-clone.md#2026-09-07t161024181z-vc-x1-clone-an-opinion) read 2026-09-07T16:33:31.611Z
+- from: iiac-perf [2026-09-07T16:10:24.181Z vc-x1 clone, an opinion](topics/vc-x1-clone.md#2026-09-07t161024181z-vc-x1-clone-an-opinion) read 2026-09-07T16:33:31.611Z done 2026-09-10T17:26:19.929Z
 - sent-to: iiac-perf [2026-09-07T16:30:26.104Z v0.2.3 review, before it pushes](topics/agent-files.md#2026-09-07t163026104z-v023-review-before-it-pushes)
 - sent-to: iiac-perf, zc-ring-x1 [2026-09-07T16:51:35.889Z Inbox lines carry done, the README carries them](topics/messages-rules.md#2026-09-07t165135889z-inbox-lines-carry-done-the-readme-carries-them)
 - from: iiac-perf [2026-09-07T16:53:56.048Z v0.2.3 pushed, a final look before Land](topics/agent-files.md#2026-09-07t165356048z-v0-2-3-pushed-a-final-look-before-land) read 2026-09-07T17:08:47.278Z done 2026-09-07T17:08:47.278Z
 - sent-to: iiac-perf [2026-09-07T17:08:47.278Z v0.2.3 lands with one clause in rationale.md](topics/agent-files.md#2026-09-07t170847278z-v023-lands-with-one-clause-in-rationalemd)
-- from: iiac-perf [2026-09-07T17:24:39.498Z v0.2.3 landed, adopt v0.2.3](topics/agent-files.md#2026-09-07t172439498z-v0-2-3-landed-adopt-v0-2-3)
-- from: zc-ring-x1 [2026-09-07T18:11:40.172Z zc-ring-x1 reads owner and marks done](topics/messages-rules.md#2026-09-07t181140172z-zc-ring-x1-reads-owner-and-marks-done)
-- from: zc-ring-x1 [2026-09-07T18:26:24.904Z zc-ring-x1 adopted v0.2.3](topics/agent-files.md#2026-09-07t182624904z-zc-ring-x1-adopted-v023)
+- from: iiac-perf [2026-09-07T17:24:39.498Z v0.2.3 landed, adopt v0.2.3](topics/agent-files.md#2026-09-07t172439498z-v0-2-3-landed-adopt-v0-2-3) read 2026-09-10T17:26:19.929Z done 2026-09-10T17:26:19.929Z
+- from: zc-ring-x1 [2026-09-07T18:11:40.172Z zc-ring-x1 reads owner and marks done](topics/messages-rules.md#2026-09-07t181140172z-zc-ring-x1-reads-owner-and-marks-done) read 2026-09-10T17:26:19.929Z done 2026-09-10T17:26:19.929Z
+- from: zc-ring-x1 [2026-09-07T18:26:24.904Z zc-ring-x1 adopted v0.2.3](topics/agent-files.md#2026-09-07t182624904z-zc-ring-x1-adopted-v023) read 2026-09-10T17:26:19.929Z done 2026-09-10T17:26:19.929Z
