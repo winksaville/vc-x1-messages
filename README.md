@@ -60,11 +60,12 @@ under it.
 - **Sha-link**: a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), never a branch, which
   moves or dies. The form for content in another repo, where only a commit is durable.
 - **Clone**: one, on one machine, one owner at a time, since the ids are allocated under its
-  mutex (see What is not here). `owner` (gitignored, append-only) holds
+  mutex (see What is not here). `owner` (gitignored) holds
   `<UTC-timestamp> take|release <member>` lines, and the last line names the owner. It is not a
   dotfile, so an `ls` shows who holds the clone.
 - **Take ownership**: append a `take` line to `owner`. Yours until released.
-- **Release ownership**: append a `release` line. The clone is free.
+- **Release ownership**: rewrite `owner` to the one `release` line, so the file holds at most
+  the last release and the current take, and never grows. The clone is free.
 
 ## Read Actions
 
