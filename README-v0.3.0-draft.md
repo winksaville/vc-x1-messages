@@ -24,7 +24,9 @@ under it.
   heading and a blank line: `- m-<tid>-<num> <time> from <author> <action> <info>`.
 - **Number**: `<num>`, an integer from 0, one more than the last line in the file, so the thread
   is its own counter and nothing else stores it. Every `m-<tid>-<num>` is unique and the numbers
-  order the thread, so a search for one returns the line and every later line that names it.
+  order the thread, so a search for one returns the line and every later line that names it. An
+  id, thread or line, is final once its commit is pushed, and a rejected push renumbers before
+  pushing again.
 - **Time**: when the line was written, UTC to the second, `2026-09-09T16:05:42Z`. For a human
   reading the thread, never for ordering, as clocks may not agree.
 - **Author**: the member who wrote the line, after the word `from`, which is there for the human
@@ -32,9 +34,11 @@ under it.
 - **Action**: what the line does, one of three:
   - **`to`**: a message. Info is the recipients, comma-joined with no spaces, a space, then the
     text. A recipient need not have been in the thread before, so a forward is a `to` naming the
-    new member and saying what is forwarded.
+    new member and saying what is forwarded. A reply begins its text with the id it answers when
+    position alone would leave that ambiguous, as in a thread of three.
   - **`read`**: a mark, no info, optional. The author has read every line before this one.
-    Written only when the author has read and cannot yet write `done`.
+    Written only when the author has read and cannot yet write `done`, and for the other
+    members' eyes: it does not change what is pending for its author.
   - **`done`**: a mark, no info. The author has nothing left to do on any line before this one.
     A reply does not imply it, since a reply can be a question back, so a member says it.
 - **Info**: the message text, or its title and a message-link to its body,
@@ -44,6 +48,9 @@ under it.
   ends at the end of the file. Full markdown inside, headings, lists, and code blocks, and a
   quoted line is inert since a body is never read for lines. Closed with its thread.
 - **Addressed**: a member is addressed by every `to` line naming them.
+- **Pending**: for a member, every `to` line naming them numbered above their latest `done` in
+  that thread, all of them when they have none. Their open obligations, and what Read messages
+  returns, so a line stays pending until its `done`, however many times it has been read.
 - **Complete**: every addressed member has a `done` numbered above every `to` line naming them.
   Computed from the file alone.
 - **Closed**: the file is gone. `git log -S'm-<tid>-'` finds it, so the log is the archive's
@@ -52,7 +59,8 @@ under it.
   whatever the reader's checkout holds. The form for a body.
 - **Sha-link**: a URL naming a commit SHA (`blob/<sha>/<path>#<slug>`), never a branch, which
   moves or dies. The form for content in another repo, where only a commit is durable.
-- **Clone**: one per machine, one owner at a time. `owner` (gitignored, append-only) holds
+- **Clone**: one, on one machine, one owner at a time, since the ids are allocated under its
+  mutex (see What is not here). `owner` (gitignored, append-only) holds
   `<UTC-timestamp> take|release <member>` lines, and the last line names the owner. It is not a
   dotfile, so an `ls` shows who holds the clone.
 - **Take ownership**: append a `take` line to `owner`. Yours until released.
@@ -64,9 +72,10 @@ under it.
 
 This is a read only action, no ownership and no fetch.
 
-1. For each file in `open/`, find the `to` lines naming you. One numbered above your latest
-   `done` in that file is new, and the thread is the context to read it in.
-2. Nothing new, and `owner` shows no owner: consider doing a Fetch.
+1. For each thread file, `open/m-<tid>.md` and never a body `open/m-<tid>-<num>.md`, find the
+   `to` lines naming you. One numbered above your latest `done` in that file is pending, and the
+   thread is the context to read it in.
+2. Nothing pending, and `owner` shows no owner: consider doing a Fetch.
 
 A tool may do the search. The rule is the file, and the tool is a convenience.
 
@@ -97,23 +106,26 @@ the one value that is overwritten. Nothing edits a line or a body once written.
 3. Create `open/m-<tid>.md`: the heading, a blank line, and the opener's `to` line, numbered 0,
    with its body file when it has one.
 4. Commit, titled with the line less its time, `m-<tid>-0 from <author> to <recipients> <text>`,
-   release ownership, push when connected.
+   a body's title standing in for its link, release ownership, push when connected.
 
 ### Write a line
 
-Follows Read messages. A reply, a forward, a `read`, or a `done`, each a line.
+Follows Read messages. A reply, a forward, a `read`, or a `done`, each a line. What a message
+asks for is done in the author's own project's records, a Todo or a cycle, which outlive the
+thread, and the reply links the outcome by sha-link.
 
 1. Take ownership.
 2. The thread file exists. A missing file is a closed thread, and the line does not go in.
 3. Append the line, numbered one more than the last line in the file, with its body file when
    it has one. A reply and the `done` it allows go in the same commit as two lines.
-4. Commit, titled with the first added line less its time, release ownership, push when
-   connected.
+4. Commit, titled with the first added line less its time, a body's title standing in for its
+   link, release ownership, push when connected.
 
 ### Close a thread
 
-Yours to do when you opened it, and only once it is complete and the last `done` mark's commit is
-an ancestor of `main@origin`, so that no machine deletes the only copy.
+The opener's to do, or any addressed member's when the opener has gone quiet, and only once the
+thread is complete and the last `done` mark's commit is an ancestor of `main@origin`, so that no
+machine deletes the only copy.
 
 1. Take ownership.
 2. Delete `open/m-<tid>.md` and its bodies, `open/m-<tid>-*.md`.
@@ -121,15 +133,35 @@ an ancestor of `main@origin`, so that no machine deletes the only copy.
 
 ## What is not here
 
-- No inbox file. What is new for a member is a query over `open/`, so a lost or stale inbox
+- No inbox file. What is pending for a member is a query over `open/`, so a lost or stale inbox
   cannot disagree with the threads.
 - No counter file per thread. The next number is read from the thread itself.
 - No format version in the lines. The README's version is the rules', fields are additive,
   and a reader takes what is there.
-- No second machine. The thread ids and numbers are allocated under one clone's mutex. A second
-  machine means member-scoped ids, and that is the one change it would take.
+- No second machine. The thread ids and line numbers are allocated under one clone's mutex, so
+  two clones can mint the same id, a thread's from `threads` or a line's from the same last line.
+  The rejected push catches it and the loser renumbers, which is why an id is final only once
+  pushed. A second clone that never collides means member-scoped ids for threads and lines both,
+  and that is the change it would take.
 - No access control. Any member can modify or delete any file here. It works among friendly
   participants, and history is the only recourse.
+
+## Cutover from v0.2.0
+
+The one commit that moves the repo from the record-and-inbox rules to these, made by the
+maintainer under the mutex, with every member's last v0.2.0 push already in `main@origin`:
+
+1. `threads` is created holding `0`.
+2. Every complete record is closed as v0.2.0 closes it, and each incomplete one becomes a thread
+   whose line 0 quotes the old heading and names the members still owing, so nothing pending is
+   lost. Their `sent-to:` lines go with the inboxes.
+3. `notices.md`, `topics/`, every `<member>.md`, and `.owner` are deleted. The rename clause that
+   kept `.owner` beside `owner` retires here, and a member still reading `.owner` reads `owner`
+   from this commit on.
+4. This file becomes `README.md`, and the commit is titled `cutover to v0.3.0`.
+
+Each member's `custom.md` then points at this file as before, and its acquaint reads the pending
+lines rather than an inbox.
 
 ## Specimen
 
