@@ -7,6 +7,4 @@
 /.jj
 
 # The clone mutex, per the README. Owned by the clone, never by the family.
-# Both names while the rename from .owner runs.
 /owner
-/.owner
