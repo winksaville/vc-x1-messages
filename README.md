@@ -1,4 +1,4 @@
-# vc-x1-messages v0.3.1
+# vc-x1-messages v0.3.2
 
 Messages for the vc-x1 family. The open threads are the inbox, the history is the archive.
 
@@ -122,10 +122,11 @@ the one value that is overwritten. Nothing edits a line or a body once written.
    pushed one, and the working copy may hold lines from several takes. Who commits is the
    humans' call, the member closing a thread the default, and the commit takes the working copy
    whole, titled with the line added less its time, a body's title standing in for its link and
-   the text cut at about 72 characters, with the ids when it carries more than one, `m-2-1 m-2-2
-   m-3-0`, or `close m-<tid> <title>` when no line was added. Push when connected, since the
-   remote is the copy no session can lose and the target every sha-link needs. A version commit
-   is never optional (see Versions).
+   the text cut at about 72 characters, with the ids when it carries more than one and closes
+   nothing, `m-2-1 m-2-2 m-3-0`, or `close m-<tid> <title>` when it closes a thread, whatever
+   lines it carries, since the close is the event. Push when connected, since the remote is the
+   copy no session can lose and the target every sha-link needs. A version commit is never
+   optional (see Versions).
 
 ### Fetch
 
@@ -190,6 +191,9 @@ under the mutex, with every member's last push already in `main@origin`. History
 rewritten, so a reader supports one shape, the one this file describes, and a tool that finds
 the title behind it says so rather than parsing the past.
 
+- v0.3.2: a commit that closes a thread is titled `close m-<tid> <title>` whatever lines it
+  carries, and a title that lists ids is for a batch that closes nothing. The first close under
+  v0.3.1, `13a7d9f7`, carried six lines, and six ids read as noise where the close is the event.
 - v0.3.1: no blank line under the heading, so line `<num>` is file line `<num>` plus two, closed
   threads move to `closed/` instead of being deleted, a commit may carry any number of actions,
   the close in the same commit as its last `done`, and a release may leave lines uncommitted, so
