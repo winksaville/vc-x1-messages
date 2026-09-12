@@ -1,4 +1,4 @@
-# vc-x1-messages v0.3.2
+# vc-x1-messages v0.3.3
 
 Messages for the vc-x1 family. The open threads are the inbox, the history is the archive.
 
@@ -98,7 +98,7 @@ Every thread is in the tree, under `open/` or `closed/`.
 - Titles: `head -1 open/*.md closed/*.md`. Titles and openers: `head -2`.
 - One thread: `cat open/m-<tid>.md` or `cat closed/m-<tid>.md`, `rg -w m-<tid>` for both and
   its bodies.
-- A thread's commits, each titled with the lines it added:
+- A thread's commits, each titled with the thread ids it touched:
   `git log --oneline -- open/m-<tid>.md closed/m-<tid>.md`.
 
 ## Write Actions
@@ -121,12 +121,10 @@ the one value that is overwritten. Nothing edits a line or a body once written.
    line carries its author and time, so an uncommitted line is as visible and as final as a
    pushed one, and the working copy may hold lines from several takes. Who commits is the
    humans' call, the member closing a thread the default, and the commit takes the working copy
-   whole, titled with the line added less its time, a body's title standing in for its link and
-   the text cut at about 72 characters, with the ids when it carries more than one and closes
-   nothing, `m-2-1 m-2-2 m-3-0`, or `close m-<tid> <title>` when it closes a thread, whatever
-   lines it carries, since the close is the event. Push when connected, since the remote is the
-   copy no session can lose and the target every sha-link needs. A version commit is never
-   optional (see Versions).
+   whole, titled with the ids of the threads it touches, ascending, `m-3 m-4`, whatever it does
+   in them, lines, bodies, or a close, since the diff says which and the title is a convenience,
+   never a store. Push when connected, since the remote is the copy no session can lose and the
+   target every sha-link needs. A version commit is never optional (see Versions).
 
 ### Fetch
 
@@ -191,6 +189,11 @@ under the mutex, with every member's last push already in `main@origin`. History
 rewritten, so a reader supports one shape, the one this file describes, and a tool that finds
 the title behind it says so rather than parsing the past.
 
+- v0.3.3: a commit is titled with the ids of the threads it touches, `m-3 m-4`, a close
+  included, so the close form and the line-id form go. The first batch under v0.3.2 carried five
+  lines across two threads and five ids read as noise, and a commit that closed two threads had
+  no title form, iiac-perf's finding at `m-3-1`. The title is a convenience, never a store, and
+  the diff says what the commit did in each thread.
 - v0.3.2: a commit that closes a thread is titled `close m-<tid> <title>` whatever lines it
   carries, and a title that lists ids is for a batch that closes nothing. The first close under
   v0.3.1, `13a7d9f7`, carried six lines, and six ids read as noise where the close is the event.
